@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row g-0">
+        <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
+            <div class="d-flex  justify-content-around align-items-center">
+            <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+            <h5 class="text-light sm-font">Traffic Challan <br> Management System</h5>
+            </div>
+            <ul class="mt-5 sidelist-data list-unstyled text-light d-flex flex-column align-items-start">
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gauge-high"></i> <a class="text-light text-decoration-none" href="Dashboard.html"> Dashboard</a></li>
+                <li class="d-flex">
+                    <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-list"></i> Challans
+                    </div>
+                    <div class="mt-1">
+                        <i class="fa-solid fa-angle-down frst-angle-btn"></i>
+                    </div>
+                </li>
+                <ul class="list-unstyled text-light d-none" id="frst-menu">
+                    <li><a href="NewChallan.html" class="text-decoration-none text-light">New Challan</a></li>
+                    <li><a href="allChallan.html" class="text-decoration-none text-light">All Challans</a></li>
+                    <li><a href="SearchChallan.html" class="text-decoration-none text-light">Search Challan</a></li>
+                </ul>
+                <li class="d-flex"> <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-clipboard-check"></i>Violations
+                    </div>
+                 <div class="mt-1">
+                        <i class="fa-solid fa-angle-down scnd-angle-btn"></i>
+                    </div></li>
+                     <ul class="list-unstyled text-light d-none" id="scnd-menu">
+                    <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
+                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                </ul>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+            </ul>
+
+        </div><!--end of frst card-->
+
+        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10 col-xxl-10 main-dashboard-card">
+            <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <!-- bar btn -->
+   <i class="fa-solid fa-bars bar-toggle-btn fs-3"></i>
+    <div class="d-flex gap-4 align-items-center">
+        <i class="fa-regular position-relative fa-bell fs-5"><span class="p-1 bg-danger bj border border-light rounded-circle"></span></i>
+        <div class="d-flex align-items-center gap-3">
+            <img class="profile-img" src="assets/images/prsn-image.png" alt="#">
+            <div class="d-flex flex-column mt-1">
+                <h6 class="sm-font">Admin Office</h6>
+                <p class="text-muted sm-font">Traffic Officer</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>  <!--end of navbar-->
+    <section class="container p-3 main-body-hol">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Challan</a></li>
+    <li class="breadcrumb-item active" aria-current="page">New Challan</li>
+  </ol>
+</nav>
+        <h3 class="fw-bold">New Challan</h3>
+        <p class="text-muted">Fill all the required information to issue a new challan</p>
+        <div class="row g-2 form-sec">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="card cards">
+                    <div class="card-body">
+                        <h4 class="fw-bold">Challan Information</h4>
+                       <form action="#">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="challandate" class="form-label">Challan Date</label>
+                                <input type="date" class="form-control" id="challandate">
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="Time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="Time" placeholder="Example input placeholder">
+                            </div>
+                           
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="Province" class="form-label">Province</label>
+                               <select name="Province-selection" id="Province" class="form-select">
+                                <option value="Sindh">Sindh</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Balochistan">Balochistan</option>
+                                <option value="KPK">KPK</option>
+                               </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="City" class="form-label">City</label>
+                               <select name="Province-selection" id="City" class="form-select">
+                                <option value="Lahore">Lahore</option>
+                                <option value="Karachi">Karachi</option>
+                                <option value="Gujranwala">Gujranwala</option>
+                                <option value="Sialkot">Sialkot</option>
+                               </select>
+                            </div>
+                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"> 
+                               <label for="TrafficSector" class="form-label">Traffic Sector</label>
+                               <select name="Province-selection" id="TrafficSector" class="form-select">
+                                <option value="GulbergSector">Gulberg Sector</option>
+                                <option value="DhaSector">Dha Sector</option>
+                                <option value="JoharTownSector">JoharTown Sector</option>
+                                <option value="TownShipSector">TownShip Sector</option>
+                               </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"> 
+                               <label for="challandate" class="form-label">Violation Location</label>
+                              <input type="text" class="form-control">
+                            </div>                             
+                        </div><!--Row  end -->
+                        </form> 
+                    </div>
+                    
+                </div>
+                    
+            </div>
+            <!-- 2 -->
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="card cards">
+                    <div class="card-body">
+                        <h4 class="fw-bold">Driver Information</h4>
+                       <form action="#">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="d_name" class="form-label">Driver Name</label>
+                                <input type="text" class="form-control" id="d_name">
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="f_name" class="form-label">Father Name</label>
+                                <input type="text" class="form-control" id="f_name" >
+                            </div>
+                           
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="CNIC" class="form-label">CNIC</label>
+                              <input type="number" id="CNIC" class="form-control">
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="D_license" class="form-label">Driving License No.</label>
+                                <input type="number" id="D_license" class="form-control">
+                               
+                            </div>
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="LicenseType" class="form-label">License Type</label>
+                               <select name="LicenseType" id="LicenseType" class="form-select">
+                                <option value="LTV">LTV</option>
+                                <option value="DhaSector">Dha Sector</option>
+                                <option value="JoharTownSector">JoharTown Sector</option>
+                                <option value="TownShipSector">TownShip Sector</option>
+                               </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="mob_no" class="form-label">Mobile Number</label>
+                              <input type="phone" class="form-control" id="mob_no">
+                            </div>
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"> 
+                               <label for="address" class="form-label">Address</label>
+                              <input type="address" class="form-control" id="address">
+                            </div>
+                        </div><!--Row  end -->
+                        </form> 
+                        </div>
+                        </div>
+                        </div>
+                         <!--3 -->
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="card cards">
+                    <div class="card-body">
+                        <h4 class="fw-bold">Vehicle Information</h4>
+                       <form action="#">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="reg_no" class="form-label">Registration Number</label>
+                                 <select name="reg_no" id="reg_no" class="form-select">
+                                <option value="LEA-18-4587">LEA-18-4587</option>
+                                <option value="LEB-20-1234">LEB-20-1234</option>
+                                <option value="LEC-15-9876">LEC-15-9876</option>
+                                <option value="LED-22-5678">LED-22-5678</option>
+                                 <option value="LEA-19-1111">LEA-19-1111</option>
+                               </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="V_type" class="form-label">Vehicle Type</label>
+                                <select name="V_type" id="V_type" class="form-select">
+                                <option value="Van">Van</option>
+                                <option value="Car">Car</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Cycle">Cycle</option>
+                                 <option value="Bus">Bus</option>
+                                   <option value="Truck">Truck</option>
+                               </select>
+                            </div>
+                           
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="v_brand" class="form-label">Vehicle Brand</label>
+                              <select name="v_brand" id="v_brand" class="form-select">
+                                <option value="Toyota">Toyota</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Mazda">Mazda</option>
+                                <option value="Ford">Ford</option>
+                                 <option value="Audi">Audi</option>
+                               </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="v_model" class="form-label">Vehicle Model</label>
+                                 <select name="v_model" id="v_model" class="form-select">
+                                <option value="Corolla 1.6">Corolla 1.6</option>
+                                <option value="Fortuner 2.7">Fortuner 2.7</option>
+                                <option value="Hilux 2.8">Hilux 2.8</option>
+                                <option value="Camry 2.5">Camry 2.5</option>
+                                <option value="other">other</option>
+                               </select>
+                               
+                            </div>
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
+                               <label for="V_clr" class="form-label">Vehicle Color</label>
+                               <select name="V_clr" id="V_clr" class="form-select">
+                                <option value="White">White</option>
+                                <option value="Black">Black</option>
+                                <option value="Gray">Gray</option>
+                                <option value="Red">Red</option>
+                               </select>
+                        </div><!--Row  end -->
+                        </form> 
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <h4 class="fw-bold">Violations</h4>
+                                        <p class="text-muted mt-2">(Select one or more)</p>
+                                    </div>
+                                         
+                                         <div class="Violation_list">
+                                            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+                                            
+                                            <!-- <div class="form-check">
+                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+    Default checkbox
+  </label>
+</div> -->
+
+                                         </div>
+                                </div>
+                            </div>
+                        </div>
+<!--end of cards-->
+        </div>
+
+  
+    </section>
+        </div> <!--end of scnd card-->
+
+    </div>
+  </div>
+
+
+    <script src="assets/css/bootstrap.bundle.min.js"></script>
+    <script src="assets/css/Script.js"></script>
+</body>
+</html>

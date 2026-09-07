@@ -1,0 +1,164 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.login-form .frst-card .bg-img{
+  height: 100%;
+  position: relative;
+  /* object-fit:contain; */
+}
+.login-form .frst-card{
+  height: 100vh;
+}
+.login-form .frst-card .main-cont{
+    position: absolute;
+    top: 200px;
+    left:150px;
+    z-index: 2;
+}
+.login-form .frst-card .logo-img{
+  height: 100px;
+  width: 100px;
+}
+.login-form .scnd-card .main-cont2{
+  margin-top: 120px;
+}
+.login-form .scnd-card .main-cont2 .form .inp{
+ width:400px;
+}
+.login-form .scnd-card .main-cont2 .form .fg-pas{
+  color: #466e9e;
+}
+.login-form .scnd-card .main-cont2 .form .login-btn{
+     border-radius: 10px;
+     height:50px;
+     background: #254266;
+}
+.login-form .scnd-card .main-cont2 .form .login-btn:hover{
+     box-shadow: 2px 2px 5px #001B48;
+     background: #001B48;
+}
+.login-form .scnd-card .main-cont2 .copyright{
+  position: absolute;
+  bottom: 0px;
+}
+.sidebar{
+  min-height: 100vh;
+  max-height: auto;
+  background-color: #001231;
+}
+.sidebar .logo-img{
+  height:60px;
+  width:60px;
+}
+.sidebar .sidelist-data{
+gap:30px;
+}
+.sidebar .sidelist-data li{
+  padding: 10px;
+}
+.sidebar .sidelist-data li:hover{
+  border-radius:5px;
+  display: block;
+  width: 100%;
+ background: #254266;
+}
+.sidebar .sidelist-data .frst-angle-btn{
+  position:absolute;
+ left:120px;
+}
+.sidebar .sidelist-data .scnd-angle-btn{
+  position:absolute;
+ left:125px;
+}
+.sidebar .sidelist-data #frst-menu{
+background:#001231;
+}
+.bj{
+  position: absolute;
+}
+.main-dashboard-card .profile-img{
+  height:35px;
+  border-radius: 50%;
+}
+.navbar{
+  background: white;
+}
+.main-dashboard-card {
+  background: #F8F9FB;
+}
+.main-body-hol .card-sec .cards{
+  border-radius: 10px;
+  height:150px;
+}
+.sm-font{
+  font-size:15px;
+}
+.main-body-hol .card-sec .cards .icon-hol{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:40px;
+  width:40px;
+  border-radius: 50%;
+  background: #000;
+}
+.main-body-hol .card-sec .cards .txt{
+  position: absolute;
+  bottom: 0px;
+}
+.main-body-hol .card-sec .cards .hol1{
+  background:#2689E7 ;
+}
+.main-body-hol .card-sec .cards .hol2{
+  background:#109B47 ;
+}
+.main-body-hol .card-sec .cards .hol3{
+  background:#F0AC15 ;
+}
+.main-body-hol .card-sec .cards .hol4{
+  background:#DF4C43;
+}
+.main-body-hol .card-sec .cards .hol5{
+  background:#8A54CB;
+}
+.main-body-hol .card-sec .cards .hol6{
+  background:#1BAFA7;
+}
+.main-body-hol .table-hol-card{
+  background: white;
+  border-radius: 10px;
+}
+.form-sec .cards{
+  border-radius:12px ;
+}
+@media (max-width:1100px){
+  .login-form .frst-card .bg-img{
+    width:100%;
+    object-fit: cover;
+    height:45%;
+}
+.login-form .frst-card .main-cont{
+  left: 392px;
+}
+.login-form .scnd-card{
+  position: relative;
+bottom:750px;
+}
+.login-form .scnd-card .main-cont2 .copyright{
+ top: 650px;
+}
+}
+@media (max-width:576px){
+  .login-form .frst-card .main-cont{
+  left:120px;
+ top: 100px;
+}
+.login-form .scnd-card .main-cont2 .form .inp{
+ width:250px;
+}
+.login-form .scnd-card{
+bottom:500px;
+}
+}

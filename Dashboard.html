@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row g-0">
+        <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
+            <div class="d-flex  justify-content-around align-items-center">
+            <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+            <h5 class="text-light sm-font">Traffic Challan <br> Management System</h5>
+            </div>
+            <ul class="mt-5 sidelist-data list-unstyled text-light d-flex flex-column align-items-start">
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gauge-high"></i> <a class="text-light text-decoration-none" href="Dashboard.html"> Dashboard</a></li>
+                <li class="d-flex">
+                    <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-list"></i> Challans
+                    </div>
+                    <div class="mt-1">
+                        <i class="fa-solid fa-angle-down frst-angle-btn"></i>
+                    </div>
+                </li>
+                <ul class="list-unstyled text-light d-none" id="frst-menu">
+                    <li><a href="NewChallan.html" class="text-decoration-none text-light">New Challan</a></li>
+                    <li><a href="allChallan.html" class="text-decoration-none text-light">All Challans</a></li>
+                    <li><a href="SearchChallan.html" class="text-decoration-none text-light">Search Challan</a></li>
+                </ul>
+                <li class="d-flex"> <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-clipboard-check"></i>Violations
+                    </div>
+                 <div class="mt-1">
+                        <i class="fa-solid fa-angle-down scnd-angle-btn"></i>
+                    </div></li>
+                     <ul class="list-unstyled text-light d-none" id="scnd-menu">
+                    <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
+                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                </ul>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+            </ul>
+
+        </div><!--end of frst card-->
+
+        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10 col-xxl-10 main-dashboard-card">
+            <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <!-- bar btn -->
+   <i class="fa-solid fa-bars bar-toggle-btn fs-3"></i>
+    <div class="d-flex gap-4 align-items-center">
+        <i class="fa-regular position-relative fa-bell fs-5"><span class="p-1 bg-danger bj border border-light rounded-circle"></span></i>
+        <div class="d-flex align-items-center gap-3">
+            <img class="profile-img" src="assets/images/prsn-image.png" alt="#">
+            <div class="d-flex flex-column mt-1">
+                <h6 class="sm-font">Admin Office</h6>
+                <p class="text-muted sm-font">Traffic Officer</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>  <!--end of navbar-->
+    <section class="container p-3 main-body-hol">
+        <h3 class="fw-bold">Dashboard</h3>
+        <div class="row card-sec">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="icon-hol hol1">
+                            <i class="fa-solid fa-file-lines text-light"></i>
+                            </div>
+                            <p>Total Challans</p>
+                        </div>
+                        <h4>1,245</h4>
+                        <p class="text-muted">All Time</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                             <div class="icon-hol hol2">
+                            <i class="fa-solid text-light fa-clipboard-list"></i></div>
+                            <p>Today Challans</p>
+                        </div>
+                        <h4>245</h4>
+                        <p class="text-muted">19 , May 2026</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 3 -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                             <div class="icon-hol hol3">
+                            <i class="fa-solid text-light fa-receipt"></i></div>
+                            <p>Paid Challans</p>
+                        </div>
+                        <h4>195</h4>
+                        <p class="text-muted">All Time</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 4-->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                             <div class="icon-hol hol4">
+                            <i class="fa-solid text-light fa-receipt"></i></div>
+                            <p>Unpaid Challan</p>
+                        </div>
+                        <h4>155</h4>
+                        <p class="text-muted">All Time</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 5 -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                             <div class="icon-hol hol5">
+                            <i class="fa-solid text-light fa-money-bill-wave"></i></div>
+                            <p>Total Fine [RS.]</p>
+                        </div>
+                        <h4>2,24588</h4>
+                        <p class="text-muted">All Time</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 6 -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="card cards">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex align-items-center gap-2">
+                             <div class="icon-hol hol6">
+                            <i class="fa-solid text-light fa-clipboard-check"></i></div>
+                            <p>Fine Collected</p>
+                        </div>
+                        <h4>1,890,000</h4>
+                        <p class="text-muted">All Time</p>
+                    </div>
+                </div>
+            </div>
+<!--end of cards-->
+        </div>
+
+        <!-- main-card showing recent challans -->
+         <div class="table-hol-card mt-5 p-3">
+            <div class="d-flex justify-content-between">
+            <h4>Recent Challans</h4>
+            <button class="btn btn-outline-primary">
+                View all
+            </button>
+            </div>
+            <div class="table-responsive mt-5">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Challan Number</th>
+      <th scope="col">Vehicle Number</th>
+      <th scope="col">Driver Name</th>
+      <th scope="col">Violation</th>
+      <th scope="col">Fine [Rs..]</th>
+      <th scope="col">Date & Time</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr>
+      <th scope="row">1</th>
+      <td>CH-2026-000123</td>
+      <td>LEA-18-4587</td>
+      <td>Ali Hassan</td>
+      <td>Signal Violation</td>
+      <td>2000</td>
+      <td>18 May,2026 10:30 AM</td>
+      <td class="text-success">Paid</td>
+    </tr>
+   
+  </tbody>
+</table>
+</div>
+         </div>
+    </section>
+        </div> <!--end of scnd card-->
+
+    </div>
+  </div>
+
+
+    <script src="assets/css/bootstrap.bundle.min.js"></script>
+    <script src="assets/css/Script.js"></script>
+</body>
+</html>
