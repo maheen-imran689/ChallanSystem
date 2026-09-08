@@ -133,6 +133,24 @@ background:#001231;
 .form-sec .cards{
   border-radius:12px ;
 }
+.Violation_list{
+  height: 250px;
+  overflow-y:scroll;
+  border: 1px solid gray;
+}
+.cncl-btn{
+  border:1px solid black;
+  width:100px;
+}
+.cncl-btn:hover{
+  background: #f5f5f5;
+}
+#challan-body{
+  background: #F8F9FB;
+}
+.challan-card-hol .logo-img{
+  height: 120px;
+}
 @media (max-width:1100px){
   .login-form .frst-card .bg-img{
     width:100%;

@@ -81,7 +81,7 @@
                 <div class="card cards">
                     <div class="card-body">
                         <h4 class="fw-bold">Challan Information</h4>
-                       <form action="#">
+                       <form action="#" class="forms">
                         <div class="row g-3">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="challandate" class="form-label">Challan Date</label>
@@ -112,7 +112,7 @@
                             </div>
                              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"> 
                                <label for="TrafficSector" class="form-label">Traffic Sector</label>
-                               <select name="Province-selection" id="TrafficSector" class="form-select">
+                               <select name="TrafficSector-selection" id="TrafficSector" class="form-select">
                                 <option value="GulbergSector">Gulberg Sector</option>
                                 <option value="DhaSector">Dha Sector</option>
                                 <option value="JoharTownSector">JoharTown Sector</option>
@@ -120,11 +120,12 @@
                                </select>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"> 
-                               <label for="challandate" class="form-label">Violation Location</label>
-                              <input type="text" class="form-control">
+                               <label for="ViolationLocation" class="form-label">Violation Location</label>
+                              <input type="text" class="form-control" id="ViolationLocation">
                             </div>                             
                         </div><!--Row  end -->
                         </form> 
+                        <p class="text-danger mt-2 error-text"></p>
                     </div>
                     
                 </div>
@@ -135,7 +136,7 @@
                 <div class="card cards">
                     <div class="card-body">
                         <h4 class="fw-bold">Driver Information</h4>
-                       <form action="#">
+                       <form action="#" class="forms">
                         <div class="row g-3">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="d_name" class="form-label">Driver Name</label>
@@ -148,20 +149,22 @@
                            
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="CNIC" class="form-label">CNIC</label>
-                              <input type="number" id="CNIC" class="form-control">
+                              <input type="text" id="CNIC" class="form-control">
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="D_license" class="form-label">Driving License No.</label>
-                                <input type="number" id="D_license" class="form-control">
+                                <input type="text" id="D_license" class="form-control">
                                
                             </div>
                              <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="LicenseType" class="form-label">License Type</label>
                                <select name="LicenseType" id="LicenseType" class="form-select">
                                 <option value="LTV">LTV</option>
-                                <option value="DhaSector">Dha Sector</option>
-                                <option value="JoharTownSector">JoharTown Sector</option>
-                                <option value="TownShipSector">TownShip Sector</option>
+                                <option value="Motorcycle License">Motorcycle License</option>
+                                <option value="Commercial Driving License">Commercial Driving License</option>
+                                <option value="International Driving Permit">International Driving Permit</option>
+                                <option value="Public Service Vehicle">Public Service Vehicle</option>
+                                <option value="Learner's License">Learner's License</option>
                                </select>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
@@ -174,6 +177,7 @@
                             </div>
                         </div><!--Row  end -->
                         </form> 
+                        <p class="text-danger mt-2 error-text2"></p>
                         </div>
                         </div>
                         </div>
@@ -182,7 +186,7 @@
                 <div class="card cards">
                     <div class="card-body">
                         <h4 class="fw-bold">Vehicle Information</h4>
-                       <form action="#">
+                       <form action="#" class="forms">
                         <div class="row g-3">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"> 
                                <label for="reg_no" class="form-label">Registration Number</label>
@@ -242,59 +246,149 @@
                         </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                            <div class="card">
+                            <div class="card cards p-2">
                                 <div class="card-body">
                                     <div class="d-flex gap-3 align-items-center">
                                         <h4 class="fw-bold">Violations</h4>
                                         <p class="text-muted mt-2">(Select one or more)</p>
                                     </div>
                                          
-                                         <div class="Violation_list">
-                                            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-                                            
-                                            <!-- <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-</div> -->
-
-                                         </div>
+                                         <div class="Violation_list p-1">
+  
+                                            <div class="d-flex justify-content-between">
+                                                <h5>Violations</h5>
+                                                <p>Fine[RS.]</p>
+                                            </div>
+                                            <ul class="list-unstyled violation_list_hol">
+                                                <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" id="flexCheckDefault" value = "Signal Violation">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       Signal Violations
+                                             </label>
+                                            </div>
+                                               <p class="fine">2,000</p>
+                                                </li>
+                                                <!-- 2 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="No helmet" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       No Helmet
+                                             </label>
+                                            </div>
+                                               <p>1,000</p>
+                                                </li>
+                                                <!-- 3 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="Seat belt violation" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       Seat Belt Violation
+                                             </label>
+                                            </div>
+                                               <p>1,500</p>
+                                                </li>
+                                                <!-- 4 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="Wrong-Way Violation" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       Wrong-Way Driving
+                                             </label>
+                                            </div>
+                                               <p>3,000</p>
+                                                </li>
+                                                <!-- 5 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="OverSpeeding" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       OverSpeeding
+                                             </label>
+                                            </div>
+                                               <p>2,500</p>
+                                                </li>
+                                                <!-- 6 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="Illegal Parking" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       Illegal Parking
+                                             </label>
+                                            </div>
+                                               <p>3,000</p>
+                                                </li>
+                                                <!-- 7 -->
+                                                 <li class="d-flex justify-content-between p-2">
+                                                    <div class="form-check">
+                                                         <input class="form-check-input violations" type="checkbox" value="Driving Without Registration" id="flexCheckDefault">
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                       Driving Without Registration
+                                             </label>
+                                            </div>
+                                               <p>5,000</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <p class="text-danger error-text3 mt-2"></p>
                                 </div>
                             </div>
                         </div>
 <!--end of cards-->
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+          <div class="card cards">
+              <div class="card-body">
+                  <h4>Officer Information</h4>
+                  <form action="#" class="forms">
+                    <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
+                               <label for="Officer_name" class="form-label">Officer Name</label>
+                               <input type="text" class="form-control" id="Officer_name">
+                                
+                            </div>
+                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
+                               <label for="Belt_no" class="form-label">Belt Number</label>
+                               <input type="text" class="form-control" id="Belt_no">
+                              
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
+                               <label for="rank" class="form-label">Rank</label>
+                              
+                                 <select name="rank" id="rank" class="form-select">
+                                <option value="ASI">ASI</option>
+                                <option value="SI">SI</option>
+                                <option value="SP">SP</option>
+                                <option value="DIG">DIG</option>
+                                 <option value="IG">IG</option>
+                               </select>
+                            </div>
+                  </form>
+                   <p class="text-danger error-text4 mt-2"></p>
+              </div>
+            </div>
+            </div>
         </div>
+         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+          <div class="card cards">
+              <div class="card-body">
+                 <h4>Total Fine</h4>
+                 <h2 class="text-success fine-value">Rs. 0</h2>
+              </div>
+          </div>
+          <div class="d-flex gap-2 mt-3 justify-content-end">
+               <button class="cncl-btn p-2">
+              Cancel
+          </button>
+           <button class="btn bg-primary Preview-btn text-light">
+             <a class="text-light text-decoration-none prev_btn" href="#">Preview</a>Challan
+          </button>
+          </div>
+       
 
-  
+        </div>
+        
+  </div>
     </section>
         </div> <!--end of scnd card-->
 
