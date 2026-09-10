@@ -15,7 +15,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-end gap-3">
-                        <button class="btn text-light bg-primary">
+                        <button class="btn text-light bg-primary print-btn">
                             Print
                         </button>
                           <button class="btn border">
@@ -33,26 +33,105 @@
                                 <h4 class="fw-bold">Traffic Challan</h4>
 
                                 <p class="text-muted">Safe Roads, Save Lives</p>
-                              <h5>Challan Number: <span class="text-danger">CH-2025-000123</span> </h5>
+                              <h5>Challan Number: <span class="text-danger ch-nm"></span> </h5>
                             </div><!---End of second card-->
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 d-flex justify-content-center justify-content-lg-end">
+                                <img class="logo-img" src="assets/images/barcode-image.png" alt="#">
 
                             </div><!---End of thrdcard-->
                         </div><!---End of row-->
-                        <div class="row mt-5">
+                        <div class="row g-3 mt-5 challan-card-hol">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-l6 col-xxl-6">
-                                <div class="card">
+                                <div class="card cards shadow-sm">
                                     <div class="card-body">
                                         <h4>Challan Information</h4>
                                        <ul class="list-unstyled frst_list">
-                                        <li>Date & Time : <span class="span_data"></span></li>
-                                        <li>Province : <span class="span_data"></span></li>
-                                        <li>City :<span class="span_data"> </span></li>
-                                        <li>Traffic Sector : <span class="span_data"></span></li>
-                                        <li>Location : <span class="span_data"></span></li>
+                                        <li>Date: <span class="span_data" data-field="C_Date"></span></li>
+                                         <li>Time : <span class="span_data" data-field="C_Time"></span></li>
+                                        <li>Province : <span class="span_data" data-field="Province"></span></li>
+                                        <li>City :<span class="span_data" data-field="City"> </span></li>
+                                        <li>Traffic Sector : <span class="span_data" data-field="TrafficSector"></span></li>
+                                        <li>Location : <span class="span_data" data-field="ViolationLocation"></span></li>
                                        </ul>
                                     </div>
+                                </div>
+                                </div>
+                                <!-- 2 -->
+                                   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-l6 col-xxl-6">
+                                <div class="card cards shadow-sm">
+                                    <div class="card-body">
+                                        <h4>Officer Information</h4>
+                                       <ul class="list-unstyled frst_list">
+                                        <li>Officer Name: <span class="span_data" data-field="OfficerInfo.O_name"></span></li>
+                                         <li>Belt No : <span class="span_data" data-field="OfficerInfo.O_beltnm"></span></li>
+                                        <li>Rank : <span class="span_data" data-field="OfficerInfo.rank"></span></li>
+                                       
+                                       </ul>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <!-- 3 -->
+                                   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-l6 col-xxl-6">
+                                <div class="card cards shadow-sm">
+                                    <div class="card-body">
+                                        <h4>Driver Information</h4>
+                                       <ul class="list-unstyled frst_list">
+                                        <li>Name: <span class="span_data" data-field="DriverInformation.D_Name"></span></li>
+                                         <li>Father Name : <span class="span_data" data-field="DriverInformation.D_Fname"></span></li>
+                                        <li>CNIC : <span class="span_data" data-field="DriverInformation.Cnic"></span></li>
+                                        <li>License No. :<span class="span_data" data-field="DriverInformation.LicenseNumber"> </span></li>
+                                        <li>License Type : <span class="span_data" data-field="DriverInformation.LicenseType"></span></li>
+                                        <li>Mobile : <span class="span_data" data-field="DriverInformation.MobNumber"></span></li>
+                                          <li>Address : <span class="span_data" data-field="DriverInformation.Address"></span></li>
+                                       </ul>
+                                    </div>
+                                </div>
+                                </div>
+                                <!-- 4 -->
+                                   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-l6 col-xxl-6">
+                                <div class="card cards shadow-sm">
+                                    <div class="card-body">
+                                        <h4>Vehicle Information</h4>
+                                       <ul class="list-unstyled frst_list">
+                                        <li>Registration No : <span class="span_data" data-field="VehicleInfo.v_registration_no"></span></li>
+                                         <li>Vehicle Type : <span class="span_data" data-field="VehicleInfo.v_type"></span></li>
+                                        <li>Brand : <span class="span_data" data-field="VehicleInfo.v_brand"></span></li>
+                                        <li>Model : <span class="span_data" data-field="VehicleInfo.v_model"></span></li>
+                                        <li>Color  :<span class="span_data" data-field="VehicleInfo.v_clr"> </span></li>
+                                      
+                                       </ul>
+                                    </div>
+                                </div>
+                                </div>
+                               <!-- table sec -->
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="table-responsive">
+                                        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Violation</th>
+      <th scope="col">Fine</th>
+    </tr>
+  </thead>
+  <tbody id="tble-body">
+    <!-- dtaa of rows -->
+    
+  </tbody>
+</table>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body d-flex align-items-center justify-content-between">
+                                            <h2 class="text-success">Total Fine (Rs.)</h2>
+                                            <h4 id="fine-card" class="text-success"></h4>
+
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>

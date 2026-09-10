@@ -151,6 +151,14 @@ background:#001231;
 .challan-card-hol .logo-img{
   height: 120px;
 }
+.challan-card-hol .cards{
+  border-radius: 10px;
+  height: 250px;
+}
+.new_challan_btn{
+  background-color: #44B262;
+  border-radius:9px ;
+}
 @media (max-width:1100px){
   .login-form .frst-card .bg-img{
     width:100%;
