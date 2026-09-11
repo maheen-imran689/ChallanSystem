@@ -140,27 +140,44 @@ else{
 }
 });
 }
-
 let table = document.querySelector('.table-body');
-
-  let rows =  defaultchallans.map((e)=>{
-    return `<tr>
-      <th scope="row">${e.id}</th>
-      <td>${e.challanNumber}</td>
-      <td>${e.vehicleNumber}</td>
-      <td>${e.driverName}</td>
-      <td>${e.violation}</td>
-      <td>${e.fine}</td>
-      <td>${e.date}</td>
-      <td class="${e.status=='PAID'?'text-success':e.status=='OVERDUE'?'text-warning':'text-danger'}">${e.status}</td>
-    </tr>
-   `
-    
-        
-})
-if(table){
-
+function DataForDashboard(){
+    let getDataForDashboard = JSON.parse(localStorage.getItem("newData"));
+    let id=0;
+    let rows =  getDataForDashboard.map((e)=>{
+        id+=1;
+        // console.log(index);
+      return `<tr>
+        <th scope="row">${id}</th>
+        <td>${e.challanNmber}</td>
+        <td>${e.VehicleInfo.v_registration_no}</td>
+        <td>${e.DriverInformation.D_Name}</td>
+        <td>${e.Violations[0]}</td>
+        <td>${e.Fine?.fine}</td>
+        <td>${e.C_Date}</td>
+      </tr>
+     `
+    })
     table.innerHTML = rows.join("");
+}
+function todayChallans(){
+    let data  = JSON.parse(localStorage.getItem("newData"));
+    let todayCard = document.querySelector('.todayChallanCount');
+    let todayDate = new Date();
+    let count =0;
+  let totalCount = data.map((e)=>{
+        if(todayDate == e.C_Date){
+            count++;
+        }
+        return count;
+    })
+    todayCard.innerText = totalCount;
+    console.log(count);
+
+}
+if(table){
+DataForDashboard();
+todayChallans();
 }
   
 let newObj;
@@ -451,42 +468,71 @@ function dataOnNewChallan(){
 
     let chlan_nm = document.querySelector('.ch-nm');
     chlan_nm.innerText = dta["challanNmber"];
-    fine_card.innerText =total_fine;
+    fine_card.innerText = total_fine;
     let spans = document.querySelectorAll(".frst_list .span_data");
 
     spans.forEach((ele) => {
         let field = ele.dataset.field;  
         ele.innerText = AccessingDataFromObject(dta,field);
-
     });
 
 }
 if (challanList) {
    dataOnNewChallan();
-//    newData();
 }
 
-// showData();
-// localStorage.removeItem("challans");
-// let t = JSON.parse(localStorage.getItem("latestData"));
-// console.log(t);
 let newData = JSON.parse(localStorage.getItem("challans"));
 
  newData = newData.filter((objects)=>{
     return objects.id!==5 && objects.id!==4 && objects.id!==3 && objects.id!==2 && objects.id!==1
  });
- localStorage.setItem("newData",JSON.stringify(newData));
+//  localStorage.setItem("newData",JSON.stringify(newData));
  let table_for_challans = document.querySelector('#table-for-all-challans');
- function renderDaata(){
+
+ function paginationEngine(currentPageNumber = "1",filterData=false,flag=false){
+     let paginationDataForChallan = JSON.parse(localStorage.getItem("newData"));
+    let currentPage  = currentPageNumber;
+    let rowsPerPage = 5;
+    let start = (currentPage - 1) * rowsPerPage;
+    let end ,pageData;
+    if(flag){
+     end = Math.min(start + rowsPerPage, filterData.length);
+       pageData = filterData.slice(start, end);   
+        renderDaata(pageData);
+    }
+    else{
+       end = Math.min(start + rowsPerPage, paginationDataForChallan.length);
+         pageData = paginationDataForChallan.slice(start, end);
+          renderDaata(pageData);
+    }
+ }
+ function paginationNumberBtns(){
+    let dta = JSON.parse(localStorage.getItem("newData"));
+    let rowsPerPage = 5;
+    let TotalPages =  Math.ceil(dta.length / rowsPerPage);
+     let array = [];
+    for(let i=1;i<=TotalPages;i++){
+           array.push(i);
+    }
+    let newListBtns =  array.map((e)=>{
+        return ` 
+        <li class="page-item" aria-current="page">
+        <span class="page-link">${e}</span>
+        </li>`
+    })
+    console.log(newListBtns);
+     let pagination = document.querySelector('.pagination');
+     pagination.innerHTML = newListBtns.join("");
+ }
+ function renderDaata(challans_data){
     
-    let challans_data = JSON.parse(localStorage.getItem('newData'));
     let id=0;
     console.log(challans_data);
    let render_table_data = challans_data.map((e)=>{
         id++;
          return `<tr class="table-row">
          <td>${id}</td>
-              <td id="challanNm">${e.challanNmber}</td>
+              <td class="challanNm">${e.challanNmber}</td>
               <td>${e.C_Date}</td>
               <td>${e.C_Time}</td>
               <td>${e.VehicleInfo.v_registration_no}</td>
@@ -509,7 +555,7 @@ function filterByChallanNumber(){
                 id++;
                 return `<tr class="table-row">
                <td>${id}</td>
-              <td id="challanNm">${e.challanNmber}</td>
+              <td class="challanNm">${e.challanNmber}</td>
               <td>${e.C_Date}</td>
               <td>${e.C_Time}</td>
               <td>${e.VehicleInfo.v_registration_no}</td>
@@ -531,7 +577,7 @@ function filterByViolationStatus(optionValue){
                 id++;
                 return `<tr class="table-row">
                <td>${id}</td>
-              <td id="challanNm">${e.challanNmber}</td>
+              <td class="challanNm">${e.challanNmber}</td>
               <td>${e.C_Date}</td>
               <td>${e.C_Time}</td>
               <td>${e.VehicleInfo.v_registration_no}</td>
@@ -546,68 +592,104 @@ function filterByViolationStatus(optionValue){
         renderTable.innerHTML  =  filterData.join("");
 }
 
-// function DataShowOnEyeIconClick(challanNmuber){
-//  let dta = JSON.parse(localStorage.getItem("newData"));
-//     let table_violation = document.querySelector('#tble-body');
-//     let fine_card = document.querySelector('#fine-card');
-//     let print_btn = document.querySelector('.print-btn');
-//      let chlan_nm = document.querySelector('.ch-nm');
-//     print_btn.addEventListener('click',()=>{
-//         window.print();
-//     }) 
-// console.log(dta);
-//     dta.map((e)=>{
-//         if(e.challanNmber == challanNmuber){
-//             console.log()
-//            chlan_nm.innerText = challanNmuber;
+function DataShowOnEyeIconClick(){
+   
+   let nmber = localStorage.getItem('selectedChallanNumber');
+   console.log(typeof(nmber));
+ let dta =JSON.parse(localStorage.getItem("newData"));
+    let table_violation = document.querySelector('#tble-body');
+    let fine_card = document.querySelector('#fine-card');
+    let chlan_nm = document.querySelector('.ch-nm');
+    console.log(chlan_nm);
+    chlan_nm.innerText = nmber;
+    let print_btn = document.querySelector('.print-btn');
+    if(print_btn){
+    print_btn.addEventListener('click',()=>{
+        window.print();
+    }) }    
+        let spans = document.querySelectorAll(".frst_list .span_data");
+        console.log(spans);
+        dta.map((e)=>{
+            if(e.challanNmber == nmber) {
+                spans.forEach((ele) => {
+                let field = ele.dataset.field; 
+                ele.innerText = AccessingDataFromObject(e,field);
+    });         
+                 fine_card.innerText = e.Fine.fine;
+                let violation = e.Violations,fines = e.Fine.fines;
+                
+             let v =  violation.map((e,index)=>{
+                return `<tr class="r">
+        <td>${e}</td>
+        <td>${fines[index]}</td>
+        </tr>
+        `
+             })
+             table_violation.innerHTML  =  v.join("");
+                console.log(violation);
+            }
+        }) ;
+    }
 
-//         }
-//     })
-
-//     let violation = dta.Violations;
-//     let array_of_fines = dta.Fine.fines;
-//     let total_fine = dta.Fine.fine;
-//     // console.log(array_of_fines);
-//   let v =  violation.map((e,index)=>{
-//      return `<tr class="r">
-//         <td>${e}</td>
-//         <td>${array_of_fines[index]}</td>
-//         </tr>
-//         `
-//     });
-//     table_violation.innerHTML = v.join("");
-
-//    
-//     fine_card.innerText =total_fine;
-//     let spans = document.querySelectorAll(".frst_list .span_data");
-
-//     spans.forEach((ele) => {
-//         let field = ele.dataset.field;  
-//         ele.innerText = AccessingDataFromObject(dta,field);
-
-    // });
-
-// }
- function Latest(){
-    table_for_challans.addEventListener('click',(e)=>{
-        if(e.target.classList.contains('fa-eye')){
+function DataRemoveOnTrashIconClick(){
+    let data = JSON.parse(localStorage.getItem('newData'));
+    let flag = false;
+      table_for_challans.addEventListener('click',(e)=>{
+        if(e.target.classList.contains('fa-trash')){
               let row = e.target.closest('.table-row');
-              let chllanNm = row.querySelector('#challanNm');
-              let eye_icon = row.querySelector('.icons-hol .fa-eye');
-              console.log(eye_icon);
-              window.location.href = "Challan.html";
-              dataOnNewChallan(chllanNm);
+              let chllanNm = row.querySelector('.challanNm');
+              data.map((e)=>{
+                if(e.challanNmber == chllanNm.innerText){
+                    data = data.filter((e)=>{
+                        console.log("gdfj");
+                        return e.challanNmber!==chllanNm.innerText;
+                    })
+                    localStorage.setItem("newData",JSON.stringify(data));
+                     let filterData = JSON.parse(localStorage.getItem('newData'));
+                     flag=true;
+                     paginationEngine("1",filterData,flag);
+                }
+              })
+             
+              console.log(chllanNm.innerText); 
+            //   localStorage.setItem("selectedChallanNumber",chllanNm.innerText.trim());
         }
     })
 }
-// DataShowOnEyeIconClick();
+
+    let ChallanPageBody = document.querySelector('#challan-body');
+     if(ChallanPageBody){
+    DataShowOnEyeIconClick();
+     }
+ function Latest(){
+     table_for_challans.addEventListener('click',(e)=>{
+        if(e.target.classList.contains('fa-eye')){
+              let row = e.target.closest('.table-row');
+              let chllanNm = row.querySelector('.challanNm');
+            //   let eye_icon = row.querySelector('.icons-hol .fa-eye');
+              console.log(chllanNm.innerText);
+              localStorage.setItem("selectedChallanNumber",chllanNm.innerText.trim());
+                    window.location.href = "Challan.html";
+        }
+    })
+}
 if(table_for_challans){
-    renderDaata();
+    paginationNumberBtns();
+     let crntPageNm;
+     paginationEngine();
+    let pagination = document.querySelector('.pagination');
+    pagination.addEventListener('click',(e) =>{
+          if(e.target.closest('.page-item')){
+            let currentPageNumber = e.target.closest('.page-link');
+            crntPageNm = currentPageNumber.innerText;
+            console.log(typeof(crntPageNm));
+            paginationEngine(crntPageNm);
+        }
+    });
     let ViolationListHol = document.querySelector('#violation-status');   
     let optionValue = "";
     ViolationListHol.addEventListener('change',(e)=>{
         optionValue = e.target.value;
-        console.log()
         filterByViolationStatus(optionValue);
     })
     let searchBtn = document.querySelector('.srch-btn');
@@ -619,7 +701,14 @@ if(table_for_challans){
             renderDaata();
         })
     });
-    Latest();
-   
+    DataRemoveOnTrashIconClick();
+   let k =  Latest();
+
+//    console.log(k);
 }
-// }
+
+// let dt =  JSON.parse(localStorage.getItem("newData"));
+// console.log(dt);
+
+//     let getDataForDashboard = JSON.parse(localStorage.getItem("newData"));
+// console.log(getDataForDashboard)
