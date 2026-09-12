@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Search Challan</title>
+</head>
+<body id="searchChallanBody">
+  <div class="container-fluid">
+    <div class="row g-0">
+        <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
+            <div class="d-flex  justify-content-around align-items-center">
+            <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+            <h5 class="text-light sm-font">Traffic Challan <br> Management System</h5>
+            </div>
+            <ul class="mt-5 sidelist-data list-unstyled text-light d-flex flex-column align-items-start">
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gauge-high"></i> <a class="text-light text-decoration-none" href="Dashboard.html"> Dashboard</a></li>
+                <li class="d-flex">
+                    <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-list"></i> Challans
+                    </div>
+                    <div class="mt-1">
+                        <i class="fa-solid fa-angle-down frst-angle-btn"></i>
+                    </div>
+                </li>
+                <ul class="list-unstyled text-light d-none" id="frst-menu">
+                    <li><a href="NewChallan.html" class="text-decoration-none text-light">New Challan</a></li>
+                    <li><a href="allChallan.html" class="text-decoration-none text-light">All Challans</a></li>
+                    <li><a href="SearchChallan.html" class="text-decoration-none text-light">Search Challan</a></li>
+                </ul>
+                <li class="d-flex"> <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-clipboard-check"></i>Violations
+                    </div>
+                 <div class="mt-1">
+                        <i class="fa-solid fa-angle-down scnd-angle-btn"></i>
+                    </div></li>
+                     <ul class="list-unstyled text-light d-none" id="scnd-menu">
+                    <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
+                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                </ul>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+            </ul>
+
+        </div><!--end of frst card-->
+
+        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10 col-xxl-10 main-dashboard-card">
+            <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <!-- bar btn -->
+   <i class="fa-solid fa-bars bar-toggle-btn fs-3"></i>
+    <div class="d-flex gap-4 align-items-center">
+        <i class="fa-regular position-relative fa-bell fs-5"><span class="p-1 bg-danger bj border border-light rounded-circle"></span></i>
+        <div class="d-flex align-items-center gap-3">
+            <img class="profile-img" src="assets/images/prsn-image.png" alt="#">
+            <div class="d-flex flex-column mt-1">
+                <h6 class="sm-font">Admin Office</h6>
+                <p class="text-muted sm-font">Traffic Officer</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>  <!--end of navbar-->
+    <section class="container p-3 main-body-hol">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Challan</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Search Challan</li>
+  </ol>
+</nav>
+         <div>
+            <h3 class="fw-bold">Search Challan</h3>
+            <p class="text-muted">Search your challan by any of the following methods</p>
+         </div>
+         <!-- btn sectioon -->
+        <div class="row mt-3 g-1 button-sec">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3 btn-hols" data-bs-toggle="collapse" data-bs-target="#one">
+                <button class="btn btns">By Challan Number</button>
+            </div>
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3 btn-hols" data-bs-toggle="collapse" data-bs-target="#two">
+                <button class="btn btns">By Vehicle Number</button>
+                </div>
+                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3 btn-hols" data-bs-toggle="collapse" data-bs-target="#two">
+                <button class="btn btns">By CNIC</button>
+                </div>
+                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3 btn-hols" data-bs-toggle="collapse" data-bs-target="#two">
+                <button class="btn btns">By Driving License</button>
+                </div>
+        </div>
+        <div class="row" id="collapseParent">
+        <!-- <div class="collapse"> -->
+            <div id="one" class="collapse show col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" data-bs-parent="#collapseParent">
+               <div class="card chlan-card">
+                <div class="card-body">
+                    
+                    <h4 class="mt-2" >Challan Number</h4>
+                    <div class="gap-2 d-flex flex-column flex-md-row flex-lg-row flex-xl-row flex-xxl-row srch-hol mt-3">
+                        <input type="text" class="form-control ch-search shadow-sm">
+                        <button class="btn text-light srch-btn">Search</button>
+                    </div>
+                    <div class="card inner-card mt-5">
+                        <div class="card-header card-hdr d-flex justify-content-around">
+                            <div>
+                                <p class="text-muted">Challan Number</p>
+                                <h6 class="text-success mdx-font ch-value">CH-2026-000231</h6>
+                            </div>
+                            <!-- 2 -->
+                              <div>
+                                <p class="text-muted">Date & Time</p>
+                                <h6 class="mdx-font date-and-time-value">18 May , 2025 10:30</h6>
+                            </div>
+                            <!-- 3 -->
+                              <div>
+                                <p class="text-muted">Status</p>
+                                <h6 class="text-success mdx-font status-value">Paid</h6>
+                            </div>
+                            
+                        </div>
+                        <div class="card-body">
+                           <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Driver</p>
+
+                                <h6 class="md-font d-nm">Ali Hassan</h6>
+                            </div>
+                            <!-- 2 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Vehicle</p>
+
+                                <h6 class="md-font vehicleNm">LEA-18-4267</h6>
+                            </div>
+                            <!-- 3 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">CNIC</p>
+
+                                <h6 class="md-font cnic">35202-9006956-2</h6>
+                            </div>
+                            <!-- 4 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Total Fine</p>
+
+                                <h6 class="text-success md-font fine">Rs. 2500</h6>
+                            </div>
+                            <!-- 5 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Mobile</p>
+
+                                <h6  class="md-font mob-nm">0211-627838</h6>
+                            </div>
+                            <!-- 6 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Payment Date</p>
+
+                                <h6 class="md-font p-date">18 May, 2025</h6>
+                            </div>
+                           </div>
+                           <button class="btn print-btn mt-4">Print Challan</button>
+                        </div>
+                    </div>
+
+            </div>
+                </div>
+               </div>
+               <div id="two" class="collapse show col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" data-bs-parent="#collapseParent">
+               <div class="card chlan-card">
+                <div class="card-body">
+                    
+                    <h4 class="mt-2" >Vehicle Number</h4>
+                    <div class="gap-2 d-flex flex-column flex-md-row flex-lg-row flex-xl-row flex-xxl-row srch-hol mt-3">
+                        <input type="text" class="form-control ch-search shadow-sm" placeholder="LEA-22-7893....">
+                        <button class="btn text-light srch-btn2">Search</button>
+                    </div>
+                    <div class="card inner-card mt-5">
+                        <div class="card-header card-hdr d-flex justify-content-around">
+                            <div>
+                                <p class="text-muted">Challan Number</p>
+                                <h6 class="text-success mdx-font ch-value">CH-2026-000231</h6>
+                            </div>
+                            <!-- 2 -->
+                              <div>
+                                <p class="text-muted">Date & Time</p>
+                                <h6 class="mdx-font date-and-time-value">18 May , 2025 10:30</h6>
+                            </div>
+                            <!-- 3 -->
+                              <div>
+                                <p class="text-muted">Status</p>
+                                <h6 class="text-success mdx-font status-value">Paid</h6>
+                            </div>
+                            
+                        </div>
+                        <div class="card-body">
+                           <div class="row g-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Driver</p>
+
+                                <h6 class="md-font d-nm">Ali Hassan</h6>
+                            </div>
+                            <!-- 2 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Vehicle</p>
+
+                                <h6 class="md-font vehicleNm">LEA-18-4267</h6>
+                            </div>
+                            <!-- 3 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">CNIC</p>
+
+                                <h6 class="md-font cnic">35202-9006956-2</h6>
+                            </div>
+                            <!-- 4 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Total Fine</p>
+
+                                <h6 class="text-success md-font fine">Rs. 2500</h6>
+                            </div>
+                            <!-- 5 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Mobile</p>
+
+                                <h6  class="md-font mob-nm">0211-627838</h6>
+                            </div>
+                            <!-- 6 -->
+                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <p class="text-muted">Payment Date</p>
+
+                                <h6 class="md-font p-date">18 May, 2025</h6>
+                            </div>
+                           </div>
+                           <button class="btn print-btn mt-4">Print Challan</button>
+                        </div>
+                    </div>
+
+            </div>
+                </div>
+               </div>
+               </div>
+        </div>
+      
+        
+            
+    </section>
+        </div> <!--end of scnd card-->
+
+    </div>
+  </div>
+
+
+    <script src="assets/css/bootstrap.bundle.min.js"></script>
+    <script src="assets/css/Script.js"></script>
+</body>
+</html>

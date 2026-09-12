@@ -159,7 +159,68 @@ background:#001231;
   background-color: #44B262;
   border-radius:9px ;
 }
+.backBtn{
+  width: 100px;
+  background:#3D3ACD;
+}
+.backBtn a{
+  font-size: 20px;
+}
+.backBtn:hover{
+  background: #0D559D;
+}
+.button-sec .btn-hols{
+  height: 60px;
+}
+.button-sec .btn-hols:hover{
+  border-bottom: 2px solid #3D3ACD;
+}
+.chlan-card .srch-btn,.srch-btn2{
+  background: #001B48;
+  border-radius: 10px;
+  width: 80px;
+  height: 50px;
+}
+.print-btn{
+  border: 1px solid #001B48;
+  color: #001B48;
+  height: 50px;
+  width: 150px;
+}
+.print-btn:hover{
+  background: #001B48 ;
+  color: white;
+}
+.mdx-font{
+  font-size:18px;
+}
+.md-font{
+  font-size:20px;
+}
+.card-hdr{
+  background: white;
+}
+.srch-hol input{
+   width:25% ;
+   border-radius: 4px;
+}
+.srch-hol input:focus{
+  border: 1px solid #001B48;}
+.button-sec .btns{
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: white;
+  height: 100%;
+}
+.inner-card{
+  border: 1px solid #E2E8F0;
+  box-shadow: 10px 10px 8px #E2E8F0;
+}
 @media (max-width:1100px){
+    .srch-hol input{
+   width:100% ;
+}
   .login-form .frst-card .bg-img{
     width:100%;
     object-fit: cover;
@@ -177,6 +238,9 @@ bottom:750px;
 }
 }
 @media (max-width:576px){
+  .srch-hol input{
+   width:100% ;
+}
   .login-form .frst-card .main-cont{
   left:120px;
  top: 100px;

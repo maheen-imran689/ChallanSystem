@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <title>Dashboard</title>
 </head>
-<body>
+<body id="dashboardBody">
   <div class="container-fluid">
     <div class="row g-0">
         <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
@@ -79,7 +79,7 @@
                             </div>
                             <p>Total Challans</p>
                         </div>
-                        <h4>1,245</h4>
+                        <h4 id="totalChallanValue">1,245</h4>
                         <p class="text-muted">All Time</p>
                     </div>
                 </div>
@@ -93,8 +93,8 @@
                             <i class="fa-solid text-light fa-clipboard-list"></i></div>
                             <p>Today Challans</p>
                         </div>
-                        <h4 id="todayChallanCount">245</h4>
-                        <p class="text-muted">19 , May 2026</p>
+                        <h4 id="todayChallanCount"></h4>
+                        <p class="text-muted todayDate">19 , May 2026</p>
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                             <i class="fa-solid text-light fa-receipt"></i></div>
                             <p>Paid Challans</p>
                         </div>
-                        <h4>195</h4>
+                        <h4 id="paidCardValue">195</h4>
                         <p class="text-muted">All Time</p>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                             <i class="fa-solid text-light fa-receipt"></i></div>
                             <p>Unpaid Challan</p>
                         </div>
-                        <h4>155</h4>
+                        <h4 id="unpaidCardValue">155</h4>
                         <p class="text-muted">All Time</p>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                             <i class="fa-solid text-light fa-money-bill-wave"></i></div>
                             <p>Total Fine [RS.]</p>
                         </div>
-                        <h4>2,24588</h4>
+                        <h4 id="totalFineCardValue">2,24588</h4>
                         <p class="text-muted">All Time</p>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                             <i class="fa-solid text-light fa-clipboard-check"></i></div>
                             <p>Fine Collected</p>
                         </div>
-                        <h4>1,890,000</h4>
+                        <h4 id="fineCollectedCardValue">1,890,000</h4>
                         <p class="text-muted">All Time</p>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
             <div class="d-flex justify-content-between">
             <h4>Recent Challans</h4>
             <button class="btn btn-outline-primary">
-                View all
+              <a href="ViewAllChallans.html" class="text-decoration-none"> View all</a>
             </button>
             </div>
             <div class="table-responsive mt-5">

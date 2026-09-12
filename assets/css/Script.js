@@ -124,6 +124,7 @@ scnd_dropdown_btn.addEventListener('click',()=>{
 let sidebar = document.querySelector('.sidebar');
 let toggle_btn = document.querySelector('.bar-toggle-btn');
 let  dashboard_menu = document.querySelector('.main-dashboard-card');
+let table = document.querySelector('.table-body');
 if(toggle_btn){
 toggle_btn.addEventListener('click',()=>{
     sidebar.classList.toggle('d-none');
@@ -140,13 +141,13 @@ else{
 }
 });
 }
-let table = document.querySelector('.table-body');
+let dashboardBody = document.querySelector('#dashboardBody');
 function DataForDashboard(){
-    let getDataForDashboard = JSON.parse(localStorage.getItem("newData"));
+    let getDataForDashboard = JSON.parse(localStorage.getItem("challans"));
+    let slicedData = getDataForDashboard.slice(0,7);
     let id=0;
-    let rows =  getDataForDashboard.map((e)=>{
+    let rows =  slicedData.map((e)=>{
         id+=1;
-        // console.log(index);
       return `<tr>
         <th scope="row">${id}</th>
         <td>${e.challanNmber}</td>
@@ -161,25 +162,116 @@ function DataForDashboard(){
     table.innerHTML = rows.join("");
 }
 function todayChallans(){
-    let data  = JSON.parse(localStorage.getItem("newData"));
-    let todayCard = document.querySelector('.todayChallanCount');
-    let todayDate = new Date();
+    let data  = JSON.parse(localStorage.getItem("challans"));
+    let datePara = document.querySelector('.todayDate');
+    let todayCard = document.querySelector('#todayChallanCount');
+    let date = new Date();
+    let currentDate = date.toISOString().split("T")[0];
     let count =0;
   let totalCount = data.map((e)=>{
-        if(todayDate == e.C_Date){
+        if(currentDate == e.C_Date){
             count++;
         }
         return count;
     })
-    todayCard.innerText = totalCount;
-    console.log(count);
+    datePara.innerText = currentDate;
+    todayCard.innerText = totalCount[(totalCount.length)-1];
 
 }
-if(table){
+function totalChallans(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+    let totalChallanCard = document.querySelector('#totalChallanValue');
+    totalChallanCard.innerText = data.length;
+}
+function paymentFeatureAdd(){
+    let data = JSON.parse(localStorage.getItem("challans"));
+    let date = new Date();
+    let crctDate = date.toISOString().split("T")[0];
+    data.forEach((e) => {
+        if(e.C_Date<=crctDate){
+            e.Payment = {
+                ispaid : false,
+                status: "OverDue"
+        }
+    }
+        else{
+             e.Payment = {
+                ispaid : false,
+                status: "Unpaid"
+        }
+    };
+    })
+  localStorage.setItem("challans", JSON.stringify(data));
+
+}
+paymentFeatureAdd();
+
+function UnpaidChallans() {
+    let unpaidCard = document.querySelector('#unpaidCardValue');
+    let count = 0;
+    let data = JSON.parse(localStorage.getItem('challans'));
+  data.forEach((e) =>{ 
+        if(e.Payment.ispaid == false){
+            count++;
+        }
+        
+    })
+    unpaidCard.innerText = count;
+}
+function paidChallans() {
+    let paidCard = document.querySelector('#paidCardValue');
+    let count = 0;
+    let data = JSON.parse(localStorage.getItem('challans'));
+  data.forEach((e) =>{ 
+        if(e.Payment.ispaid == true){
+            count++;
+        }
+        
+    })
+   paidCard.innerText = count;
+
+}
+function totalFineOfChallans() {
+    let TotalFineCard = document.querySelector('#totalFineCardValue');
+     let fineCollected = document.querySelector('#fineCollectedCardValue');
+    let sum = 0;
+    let data = JSON.parse(localStorage.getItem('challans'));
+  data.forEach((e) =>{ 
+        sum+=e.Fine.fine;
+        
+    })
+    fineCollected.innerText = 0;
+      TotalFineCard.innerText = sum;
+
+}
+
+if(dashboardBody){
 DataForDashboard();
 todayChallans();
+totalChallans();
+UnpaidChallans();
+paidChallans();
+totalFineOfChallans();
 }
-  
+  let recordsTable = document.querySelector('#ChallanRecord-table');
+  function showAllRecords(){
+    let data =  JSON.parse(localStorage.getItem("challans"));
+  let tableData =  data.map((e) => {
+        return ` <tr>
+           <td>${e.challanNmber}</td>
+           <td>${e.DriverInformation.D_Name}</td>
+           <td>${e.VehicleInfo.v_type}</td>
+           <td>${e.Fine.fine}</td>
+           <td>${e.Payment.status}</td>
+        </tr>
+        `
+    });
+    console.log(data);
+    recordsTable.innerHTML =  tableData.join("");
+  }
+  if(recordsTable){
+     showAllRecords();
+  } 
 let newObj;
 function ChallanInfoValidation(newObj){
      let challanDateField = document.querySelector('#challandate');
@@ -307,11 +399,9 @@ function ViolationsValidation(newObj){
    
       let error_text3 = document.querySelector('.error-text3');
     let checkboxes =  document.querySelectorAll("input[type = 'checkbox']");
-    // console.log(checkboxes);
     newObj.Violations = [];
     checkboxes.forEach((boxes)=>{
         if(boxes.checked){
-            // console.log(boxes.value);
             newObj.Violations.push(boxes.value);
             error_text3.innerText = "";
         }
@@ -373,11 +463,6 @@ function validation(){
 
    let challan_nm = RandomChallanNumGenerator();
     newObj.challanNmber = challan_nm;
-//    console.log(CI);
-//    console.log(DI);
-//    console.log(SV);
-//    console.log(VV);
-//    console.log(OV);
    if(CI && DI && SV && VV && OV){
     return newObj;
    }
@@ -393,7 +478,6 @@ function RandomChallanNumGenerator(){
      nm+=rand;
    }
    return nm;
-//    console.log(nm);
 }
 function showData(){
 
@@ -403,7 +487,6 @@ function showData(){
         console.log(data2[i]);
     }
 }
-// fineCalculation();
 
 let PreviewBtn = document.querySelector('.Preview-btn');
 if(PreviewBtn){
@@ -414,7 +497,9 @@ PreviewBtn.addEventListener('click',()=>{
      }
            challans.push(newObj);
       localStorage.setItem("challans",JSON.stringify(challans));
+    //   localStorage.setItem("newData",JSON.stringify(challans));
      localStorage.setItem("latestData",JSON.stringify(newObj))  || [] ;
+     localStorage.setItem("ReachingSource","previewBtn");
     window.location.href = "Challan.html";
 
 }
@@ -437,14 +522,13 @@ cancel_btn.addEventListener('click',()=>{
     })
 })}
 
-let challanList = document.querySelector(".frst_list");
 function AccessingDataFromObject(object,path){
     return path.split('.').reduce((value,key)=>{
         return value?.[key];
     },object);
 }
 function dataOnNewChallan(){
- let dta = JSON.parse(localStorage.getItem("latestData"));
+    let dta = JSON.parse(localStorage.getItem("latestData"));
     let table_violation = document.querySelector('#tble-body');
     let fine_card = document.querySelector('#fine-card');
     let print_btn = document.querySelector('.print-btn');
@@ -453,10 +537,9 @@ function dataOnNewChallan(){
     })
 
     let violation = dta.Violations;
-    let array_of_fines = dta.Fine.fines;
-    let total_fine = dta.Fine.fine;
+    let array_of_fines = dta.Fine?.fines;
+    let total_fine = dta.Fine?.fine;
   
-    // console.log(array_of_fines);
   let v =  violation.map((e,index)=>{
      return `<tr class="r">
         <td>${e}</td>
@@ -477,20 +560,12 @@ function dataOnNewChallan(){
     });
 
 }
-if (challanList) {
-   dataOnNewChallan();
-}
 
-let newData = JSON.parse(localStorage.getItem("challans"));
-
- newData = newData.filter((objects)=>{
-    return objects.id!==5 && objects.id!==4 && objects.id!==3 && objects.id!==2 && objects.id!==1
- });
-//  localStorage.setItem("newData",JSON.stringify(newData));
  let table_for_challans = document.querySelector('#table-for-all-challans');
 
  function paginationEngine(currentPageNumber = "1",filterData=false,flag=false){
-     let paginationDataForChallan = JSON.parse(localStorage.getItem("newData"));
+     let paginationDataForChallan = JSON.parse(localStorage.getItem("challans"));
+    //  console.log(paginationDataForChallan);
     let currentPage  = currentPageNumber;
     let rowsPerPage = 5;
     let start = (currentPage - 1) * rowsPerPage;
@@ -507,7 +582,7 @@ let newData = JSON.parse(localStorage.getItem("challans"));
     }
  }
  function paginationNumberBtns(){
-    let dta = JSON.parse(localStorage.getItem("newData"));
+    let dta = JSON.parse(localStorage.getItem("challans"));
     let rowsPerPage = 5;
     let TotalPages =  Math.ceil(dta.length / rowsPerPage);
      let array = [];
@@ -520,7 +595,7 @@ let newData = JSON.parse(localStorage.getItem("challans"));
         <span class="page-link">${e}</span>
         </li>`
     })
-    console.log(newListBtns);
+    // console.log(newListBtns);
      let pagination = document.querySelector('.pagination');
      pagination.innerHTML = newListBtns.join("");
  }
@@ -535,7 +610,7 @@ let newData = JSON.parse(localStorage.getItem("challans"));
               <td class="challanNm">${e.challanNmber}</td>
               <td>${e.C_Date}</td>
               <td>${e.C_Time}</td>
-              <td>${e.VehicleInfo.v_registration_no}</td>
+                <td>${e.VehicleInfo.v_registration_no}</td>
               <td>${e.DriverInformation.D_Name}</td>
               <td>${e.Fine?.fine}</td>
               <td class="icons-hol"><i class="fa-regular fa-eye text-primary"></i> <i class="fa-solid ms-4 fa-trash text-danger"></i></td>
@@ -549,7 +624,7 @@ function filterByChallanNumber(){
     let searchInp =  document.querySelector('.ch-nm-inp');
   
     let srchData = searchInp.value.trim();
-        let challanData = JSON.parse(localStorage.getItem('newData'));
+        let challanData = JSON.parse(localStorage.getItem('challans'));
         let filterData =  challanData.map((e)=>{
             if(e.challanNmber == srchData){
                 id++;
@@ -570,7 +645,7 @@ function filterByChallanNumber(){
 }
 function filterByViolationStatus(optionValue){
     let id=0;
-    let challanData = JSON.parse(localStorage.getItem('newData'));
+    let challanData = JSON.parse(localStorage.getItem('challans'));
         let filterData =  challanData.map((e)=>{
             for(let i=0 ;i<7;i++){
             if(e.Violations[i] == optionValue){
@@ -596,7 +671,7 @@ function DataShowOnEyeIconClick(){
    
    let nmber = localStorage.getItem('selectedChallanNumber');
    console.log(typeof(nmber));
- let dta =JSON.parse(localStorage.getItem("newData"));
+ let dta =JSON.parse(localStorage.getItem("challans"));
     let table_violation = document.querySelector('#tble-body');
     let fine_card = document.querySelector('#fine-card');
     let chlan_nm = document.querySelector('.ch-nm');
@@ -615,7 +690,7 @@ function DataShowOnEyeIconClick(){
                 let field = ele.dataset.field; 
                 ele.innerText = AccessingDataFromObject(e,field);
     });         
-                 fine_card.innerText = e.Fine.fine;
+                 fine_card.innerText = e.Fine?.fine;
                 let violation = e.Violations,fines = e.Fine.fines;
                 
              let v =  violation.map((e,index)=>{
@@ -632,7 +707,7 @@ function DataShowOnEyeIconClick(){
     }
 
 function DataRemoveOnTrashIconClick(){
-    let data = JSON.parse(localStorage.getItem('newData'));
+    let data = JSON.parse(localStorage.getItem('challans'));
     let flag = false;
       table_for_challans.addEventListener('click',(e)=>{
         if(e.target.classList.contains('fa-trash')){
@@ -644,8 +719,8 @@ function DataRemoveOnTrashIconClick(){
                         console.log("gdfj");
                         return e.challanNmber!==chllanNm.innerText;
                     })
-                    localStorage.setItem("newData",JSON.stringify(data));
-                     let filterData = JSON.parse(localStorage.getItem('newData'));
+                    localStorage.setItem("challans",JSON.stringify(data));
+                     let filterData = JSON.parse(localStorage.getItem('challans'));
                      flag=true;
                      paginationEngine("1",filterData,flag);
                 }
@@ -659,7 +734,14 @@ function DataRemoveOnTrashIconClick(){
 
     let ChallanPageBody = document.querySelector('#challan-body');
      if(ChallanPageBody){
-    DataShowOnEyeIconClick();
+        let source = localStorage.getItem('ReachingSource');
+        if(source == "eyeBtn" ){
+            DataShowOnEyeIconClick();
+        }
+        else{
+            
+            dataOnNewChallan();
+        }
      }
  function Latest(){
      table_for_challans.addEventListener('click',(e)=>{
@@ -669,6 +751,7 @@ function DataRemoveOnTrashIconClick(){
             //   let eye_icon = row.querySelector('.icons-hol .fa-eye');
               console.log(chllanNm.innerText);
               localStorage.setItem("selectedChallanNumber",chllanNm.innerText.trim());
+              localStorage.setItem("ReachingSource","eyeBtn");
                     window.location.href = "Challan.html";
         }
     })
@@ -706,9 +789,79 @@ if(table_for_challans){
 
 //    console.log(k);
 }
+let srchChallanBody = document.querySelector('#searchChallanBody');
+function SearchDataThroughCNm(){
+   let data = JSON.parse(localStorage.getItem("challans"));
+   console.log(data);
+   let inp = document.querySelector('.ch-search').value.trim();
+   let chalanNm = document.querySelector('.ch-value');
+   let dateAndTime = document.querySelector('.date-and-time-value');
+   let status = document.querySelector('.status-value');
+   let driverName = document.querySelector('.d-nm');
+   let V_nm  = document.querySelector('.vehicleNm');
+   let cnic = document.querySelector('.cnic');
+   let TotalFine  = document.querySelector('.fine');
+   let mob = document.querySelector('.mob-nm');
+   let PayDate = document.querySelector('.p-date');
+   data.map((e) =>{
+    if(e.challanNmber == inp){
+        chalanNm.innerText = e.challanNmber;
+        dateAndTime.innerText =`${e.C_Date}  ${e.C_Time}`;
+        if(e.Payment.ispaid == false){
+            status.innerText = "Unpaid"
+        }
+        driverName.innerText = e.DriverInformation.D_Name;
+        V_nm.innerText = e.VehicleInfo.v_registration_no;
+        cnic.innerText = e.DriverInformation.Cnic;
+        TotalFine.innerText = e.Fine.fine;
+        mob.innerText = e.DriverInformation.MobNumber;
+        PayDate.innerText = e.C_Date;
+    }
 
-// let dt =  JSON.parse(localStorage.getItem("newData"));
-// console.log(dt);
+   })
+}
+function SearchDataThroughVNm(){
+   let data = JSON.parse(localStorage.getItem("challans"));
+   let inp = document.querySelector('.ch-search').value.trim();
+   let chalanNm = document.querySelector('.ch-value');
+   let dateAndTime = document.querySelector('.date-and-time-value');
+   let status = document.querySelector('.status-value');
+   let driverName = document.querySelector('.d-nm');
+   let V_nm  = document.querySelector('.vehicleNm');
+   let cnic = document.querySelector('.cnic');
+   let TotalFine  = document.querySelector('.fine');
+   let mob = document.querySelector('.mob-nm');
+   let PayDate = document.querySelector('.p-date');
+   data.map((e) =>{
+    if(e.VehicleInfo.v_registration_no == inp){
+        chalanNm.innerText = e.challanNmber;
+        dateAndTime.innerText =`${e.C_Date}  ${e.C_Time}`;
+        if(e.Payment.ispaid == false){
+            status.innerText = "Unpaid"
+        }
+        driverName.innerText = e.DriverInformation.D_Name;
+        V_nm.innerText = e.VehicleInfo.v_registration_no;
+        cnic.innerText = e.DriverInformation.Cnic;
+        TotalFine.innerText = e.Fine.fine;
+        mob.innerText = e.DriverInformation.MobNumber;
+        PayDate.innerText = e.C_Date;
+    }
 
-//     let getDataForDashboard = JSON.parse(localStorage.getItem("newData"));
-// console.log(getDataForDashboard)
+   })
+
+
+}
+
+// SearchDataThroughCNm();
+if(srchChallanBody){
+    let SearchBtn = document.querySelector('.srch-btn');
+    let SearchBtn2 = document.querySelector('.srch-btn2');
+    SearchBtn.addEventListener('click',()=>{
+        SearchDataThroughCNm();
+    });
+    SearchBtn2.addEventListener('click',()=>{
+        SearchDataThroughVNm();
+        console.log('sdjk')
+
+    })
+}
