@@ -1,63 +1,4 @@
 const defaultchallans = [
-    // {
-    //     id: 1,
-    //     challanNumber: "CH-2025-000123",
-    //     vehicleNumber: "LEA-18-4587",
-    //     driverName: "Ali Hassan",
-    //     violation: "Signal Violation",
-    //     fine: 2000,
-    //     date: "2025-05-18",
-    //     time: "10:30 AM",
-    //     status: "PAID"
-    // },
-
-    // {
-    //     id: 2,
-    //     challanNumber: "CH-2025-000122",
-    //     vehicleNumber: "LEB-20-1234",
-    //     driverName: "Usman Khan",
-    //     violation: "No Helmet",
-    //     fine: 1000,
-    //     date: "2025-05-18",
-    //     time: "09:45 AM",
-    //     status: "UNPAID"
-    // },
-
-    // {
-    //     id: 3,
-    //     challanNumber: "CH-2025-000121",
-    //     vehicleNumber: "LEC-15-9876",
-    //     driverName: "Faisal Shah",
-    //     violation: "Seat Belt Violation",
-    //     fine: 1500,
-    //     date: "2025-05-18",
-    //     time: "09:10 AM",
-    //     status: "PAID"
-    // },
-
-    // {
-    //     id: 4,
-    //     challanNumber: "CH-2025-000120",
-    //     vehicleNumber: "LED-22-5678",
-    //     driverName: "Hamza Tariq",
-    //     violation: "Overspeeding",
-    //     fine: 2500,
-    //     date: "2025-05-18",
-    //     time: "08:50 AM",
-    //     status: "OVERDUE"
-    // },
-
-    // {
-    //     id: 5,
-    //     challanNumber: "CH-2025-000119",
-    //     vehicleNumber: "LEA-19-1111",
-    //     driverName: "Bilal Ahmed",
-    //     violation: "Illegal Parking",
-    //     fine: 1500,
-    //     date: "2025-05-18",
-    //     time: "08:20 AM",
-    //     status: "UNPAID"
-    // },
      {
         C_Date: "2026-09-04",
         C_Time: "03:09",
@@ -72,7 +13,7 @@ const defaultchallans = [
             Address: "d",
             LicenseType: "LTV",
             Cnic: "35202-9006056-2",
-            D_License: "DL-123456"
+            LicenseNumber:"aa-1004-19875"
         },
 
         Fine: {
@@ -561,24 +502,55 @@ function dataOnNewChallan(){
 
 }
 
+ function PaymentrenderData(challans_data){
+    localStorage.setItem('flag2',JSON.stringify("false"));
+    let paymentTable = document.querySelector('#PaymentTable');
+    let id=0;
+    console.log(challans_data);
+   let render_table_data = challans_data.map((e)=>{
+        id++;
+         return `<tr class="table-row">
+         <td>${id}</td>
+              <td class="challanNm">${e.challanNmber}</td>
+              <td>${e.C_Date}</td>
+              <td>${e.C_Time}</td>
+                <td>${e.VehicleInfo.v_registration_no}</td>
+              <td>${e.DriverInformation.D_Name}</td>
+              <td>${e.Fine?.fine}</td>
+              <td class="icons-hol"><i class="fa-solid text-warning fs-5 fa-credit-card"></i></td>
+              
+         </tr>`
+    });
+    paymentTable.innerHTML = render_table_data.join("");
+    localStorage.setItem('flag2',JSON.stringify("true"));
+}
+
  let table_for_challans = document.querySelector('#table-for-all-challans');
 
  function paginationEngine(currentPageNumber = "1",filterData=false,flag=false){
      let paginationDataForChallan = JSON.parse(localStorage.getItem("challans"));
-    //  console.log(paginationDataForChallan);
+     let flag2 = localStorage.getItem('flag2');
     let currentPage  = currentPageNumber;
     let rowsPerPage = 5;
     let start = (currentPage - 1) * rowsPerPage;
     let end ,pageData;
+   
     if(flag){
      end = Math.min(start + rowsPerPage, filterData.length);
        pageData = filterData.slice(start, end);   
-        renderDaata(pageData);
     }
     else{
        end = Math.min(start + rowsPerPage, paginationDataForChallan.length);
          pageData = paginationDataForChallan.slice(start, end);
-          renderDaata(pageData);
+    }
+     if(flag2 == "true"){
+          PaymentrenderData(pageData);
+    }
+    if(!table_for_challans){
+        return;
+    }
+    else{
+        renderDaata(pageData);
     }
  }
  function paginationNumberBtns(){
@@ -621,7 +593,7 @@ function dataOnNewChallan(){
 }
 function filterByChallanNumber(){
   let id=0;
-    let searchInp =  document.querySelector('.ch-nm-inp');
+    let searchInp =  document.querySelector('#ch-nm-inp');
   
     let srchData = searchInp.value.trim();
         let challanData = JSON.parse(localStorage.getItem('challans'));
@@ -779,20 +751,18 @@ if(table_for_challans){
     searchBtn.addEventListener('click',()=>{
         filterByChallanNumber();
 
-        let searchInp =  document.querySelector('.ch-nm-inp');
+        let searchInp =  document.querySelector('#ch-nm-inp');
         searchInp.addEventListener('focusin',()=>{
             renderDaata();
         })
     });
     DataRemoveOnTrashIconClick();
    let k =  Latest();
-
-//    console.log(k);
 }
 let srchChallanBody = document.querySelector('#searchChallanBody');
 function SearchDataThroughCNm(){
    let data = JSON.parse(localStorage.getItem("challans"));
-   console.log(data);
+   let inpField = document.querySelector('.ch-search');
    let inp = document.querySelector('.ch-search').value.trim();
    let chalanNm = document.querySelector('.ch-value');
    let dateAndTime = document.querySelector('.date-and-time-value');
@@ -803,6 +773,9 @@ function SearchDataThroughCNm(){
    let TotalFine  = document.querySelector('.fine');
    let mob = document.querySelector('.mob-nm');
    let PayDate = document.querySelector('.p-date');
+    if(inpField.value === "") {
+    inpField.placeholder = "enter value to get results.... ";
+   }
    data.map((e) =>{
     if(e.challanNmber == inp){
         chalanNm.innerText = e.challanNmber;
@@ -822,16 +795,20 @@ function SearchDataThroughCNm(){
 }
 function SearchDataThroughVNm(){
    let data = JSON.parse(localStorage.getItem("challans"));
-   let inp = document.querySelector('.ch-search').value.trim();
-   let chalanNm = document.querySelector('.ch-value');
-   let dateAndTime = document.querySelector('.date-and-time-value');
-   let status = document.querySelector('.status-value');
-   let driverName = document.querySelector('.d-nm');
-   let V_nm  = document.querySelector('.vehicleNm');
-   let cnic = document.querySelector('.cnic');
-   let TotalFine  = document.querySelector('.fine');
-   let mob = document.querySelector('.mob-nm');
-   let PayDate = document.querySelector('.p-date');
+   let inpField = document.querySelector('.ch-search2');
+   let inp = document.querySelector('.ch-search2').value.trim();
+   let chalanNm = document.querySelector('.ch-value2');
+   let dateAndTime = document.querySelector('.date-and-time-value2');
+   let status = document.querySelector('.status-value2');
+   let driverName = document.querySelector('.d-nm2');
+   let V_nm  = document.querySelector('.vehicleNm2');
+   let cnic = document.querySelector('.cnic2');
+   let TotalFine  = document.querySelector('.fine2');
+   let mob = document.querySelector('.mob-nm2');
+   let PayDate = document.querySelector('.p-date2');
+    if(inpField.value === "") {
+    inpField.placeholder = "enter value to get results.... ";
+   }
    data.map((e) =>{
     if(e.VehicleInfo.v_registration_no == inp){
         chalanNm.innerText = e.challanNmber;
@@ -848,20 +825,189 @@ function SearchDataThroughVNm(){
     }
 
    })
-
-
 }
+function SearchDataThroughCNIC(){
+   let data = JSON.parse(localStorage.getItem("challans"));
+   let inpField = document.querySelector('.ch-search3');
+   let inp = document.querySelector('.ch-search3').value.trim();
+   let chalanNm = document.querySelector('.ch-value3');
+   let dateAndTime = document.querySelector('.date-and-time-value3');
+   let status = document.querySelector('.status-value3');
+   let driverName = document.querySelector('.d-nm3');
+   let V_nm  = document.querySelector('.vehicleNm3');
+   let cnic = document.querySelector('.cnic3');
+   let TotalFine  = document.querySelector('.fine3');
+   let mob = document.querySelector('.mob-nm3');
+   let PayDate = document.querySelector('.p-date3');
+    if(inpField.value === "") {
+    inpField.placeholder = "enter value to get results.... ";
+   }
+   data.map((e) =>{
+    if(e.DriverInformation.Cnic == inp){
+        chalanNm.innerText = e.challanNmber;
+        dateAndTime.innerText =`${e.C_Date}  ${e.C_Time}`;
+        if(e.Payment.ispaid == false){
+            status.innerText = "Unpaid"
+        }
+        driverName.innerText = e.DriverInformation.D_Name;
+        V_nm.innerText = e.VehicleInfo.v_registration_no;
+        cnic.innerText = e.DriverInformation.Cnic;
+        TotalFine.innerText = e.Fine.fine;
+        mob.innerText = e.DriverInformation.MobNumber;
+        PayDate.innerText = e.C_Date;
+    }
 
-// SearchDataThroughCNm();
+   })
+}
+function SearchDataThroughLicenseNm(){
+   let data = JSON.parse(localStorage.getItem("challans"));
+   let inpField = document.querySelector('.ch-search4');
+   let inp = document.querySelector('.ch-search4').value.trim();
+   let chalanNm = document.querySelector('.ch-value4');
+   let dateAndTime = document.querySelector('.date-and-time-value4');
+   let status = document.querySelector('.status-value4');
+   let driverName = document.querySelector('.d-nm4');
+   let V_nm  = document.querySelector('.vehicleNm4');
+   let cnic = document.querySelector('.cnic4');
+   let TotalFine  = document.querySelector('.fine4');
+   let mob = document.querySelector('.mob-nm4');
+   let PayDate = document.querySelector('.p-date4');
+   if(inpField.value === "") {
+    inpField.placeholder = "enter value to get results.... ";
+   }
+   console.log(data);
+   data.map((e) =>{
+    if(e.DriverInformation.LicenseNumber == inp){
+        chalanNm.innerText = e.challanNmber;
+        dateAndTime.innerText =`${e.C_Date}  ${e.C_Time}`;
+        if(e.Payment.ispaid == false){
+            status.innerText = "Unpaid"
+        }
+        driverName.innerText = e.DriverInformation.D_Name;
+        V_nm.innerText = e.VehicleInfo.v_registration_no;
+        cnic.innerText = e.DriverInformation.Cnic;
+        TotalFine.innerText = e.Fine.fine;
+        mob.innerText = e.DriverInformation.MobNumber;
+        PayDate.innerText = e.C_Date;
+    }
+
+   })
+}
 if(srchChallanBody){
     let SearchBtn = document.querySelector('.srch-btn');
     let SearchBtn2 = document.querySelector('.srch-btn2');
+    let SearchBtn3 = document.querySelector('.srch-btn3');
+    let SearchBtn4 = document.querySelector('.srch-btn4');
     SearchBtn.addEventListener('click',()=>{
         SearchDataThroughCNm();
     });
     SearchBtn2.addEventListener('click',()=>{
         SearchDataThroughVNm();
-        console.log('sdjk')
+    })
+     SearchBtn3.addEventListener('click',()=>{
+        SearchDataThroughCNIC();
+    })
+     SearchBtn4.addEventListener('click',()=>{
+        SearchDataThroughLicenseNm();
+    })
+    let printBtn = document.querySelector('.print-btn');
+    printBtn.addEventListener('click',()=>{
+        window.print();
+    })
+}
+function filterByChNmOnpaymentTable(){
+  let id=0;
+  let Ptable = document.querySelector('#PaymentTable');
+    let searchInp =  document.querySelector('#ch-nm-inp');
+  
+    let srchData = searchInp.value.trim();
+        let challanData = JSON.parse(localStorage.getItem('challans'));
+        let filterData =  challanData.map((e)=>{
+            if(e.challanNmber == srchData){
+                id++;
+                return `<tr class="table-row">
+               <td>${id}</td>
+              <td class="challanNm">${e.challanNmber}</td>
+              <td>${e.C_Date}</td>
+              <td>${e.C_Time}</td>
+              <td>${e.VehicleInfo.v_registration_no}</td>
+              <td>${e.DriverInformation.D_Name}</td>
+              <td>${e.Fine?.fine}</td>
+              <td class="icons-hol"><i class="fa-regular fa-eye text-primary"></i> <i class="fa-solid ms-4 fa-trash text-danger"></i></td>
+         </tr>`
+            }
+        });
+        // let renderTable =  document.querySelector('#table-for-all-challans');
+        Ptable.innerHTML  =  filterData.join("");
+}
 
+let paymentBody = document.querySelector('#PaymentBody');
+ function MovingTowardPaymentPage(){
+    let PaymentTable = document.querySelector('#PaymentTable');
+    PaymentTable.addEventListener('click',(e) =>{
+        if(e.target.closest('.table-row')){
+            let cardIcon = e.target;
+            let row = e.target.closest('.table-row');
+            let chNm = row.querySelector('.challanNm').innerText;
+            localStorage.setItem('slctdChNm',JSON.stringify(chNm));
+            console.log(chNm);
+            window.location.href = "PaymentForm.html";
+        
+        }
+    })
+ }
+if(paymentBody){
+    paginationNumberBtns();
+    let data = JSON.parse(localStorage.getItem('challans'));
+PaymentrenderData(data);
+paginationEngine();
+let searchBtn = document.querySelector('.search-btn2');
+searchBtn.addEventListener('click',() =>{
+    filterByChNmOnpaymentTable();
+    let searchInp =  document.querySelector('#ch-nm-inp');
+        searchInp.addEventListener('focusin',()=>{
+           PaymentrenderData(data);
+        })
+})
+MovingTowardPaymentPage();
+}
+
+let PaymentFormBody = document.querySelector('#PaymentFormBody');
+function StoringPaymentInfo(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+
+    let chllanNM = document.querySelector('#chllanNM').value;
+    let fineAmount = document.querySelector('#fineAmount').value;
+    let PaymentMethod = document.querySelector('#PaymentMethod').value;
+    let transactionId = document.querySelector('#transactionId').value;
+    let paymentDate = document.querySelector('#paymentDate').value; 
+   let PayValidationPara = document.querySelector('.pay-prompt');
+    let chNmSlctd = localStorage.getItem('slctdChNm');
+    if(chllanNM == "" && fineAmount == "" && PaymentMethod == "" && transactionId == "" && paymentDate == "" ) {
+        PayValidationPara.innerText = "Fill all the required Fields"
+    }
+    else{
+     PayValidationPara.innerText = "";   
+    }
+    // console.log(new Date().toLocaleDateString());
+    data.map((e) => {
+        if(e.challanNmber == chllanNM) {
+            e.Payment.status = "Paid";
+            e.Payment.paymentDate = new Date().toLocaleDateString();
+            e.Payment.paymentMethod = PaymentMethod;
+        }
+    })
+    // console.log(data);
+    localStorage.setItem('challans',JSON.stringify(data));
+    
+let storedData = JSON.parse(localStorage.getItem("challans"));
+    console.log(storedData);
+
+}
+if(PaymentFormBody) {
+    let PayBtn = document.querySelector('.pay-btn');
+    PayBtn.addEventListener('click',(e) =>{
+
+        StoringPaymentInfo();
     })
 }

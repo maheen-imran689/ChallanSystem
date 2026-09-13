@@ -175,7 +175,7 @@ background:#001231;
 .button-sec .btn-hols:hover{
   border-bottom: 2px solid #3D3ACD;
 }
-.chlan-card .srch-btn,.srch-btn2{
+.chlan-card .srch-btn,.srch-btn2,.srch-btn3,.srch-btn4{
   background: #001B48;
   border-radius: 10px;
   width: 80px;
@@ -216,6 +216,57 @@ background:#001231;
 .inner-card{
   border: 1px solid #E2E8F0;
   box-shadow: 10px 10px 8px #E2E8F0;
+}
+.pay-btn{
+  width: 100px;
+  color: #109B47;
+  border:1px solid #109B47;
+}
+.pay-btn:hover{
+  background: #44B262;
+}
+.report-sec-btn-hol .btns{
+  border: 1px solid #2667FF;
+  color:#2667FF;
+  border-radius: 10px;
+  height: 50px;
+}
+#apply-btn{
+  width: 100px;
+}
+#fromDate,#toDate{
+  width:260px;
+   box-shadow:2px 2px 10px gray;
+}
+.FilterCardbtns:hover{
+  color: white;
+}
+.FilterCardbtns{
+  margin-top: 20px;
+  color: white;
+  border-radius: 10px;
+  height: 50px;
+  box-shadow: 4px 4px 4px gray;
+  background: #2667FF;
+}
+.ResetBtn:hover{
+  border: 1px  solid gray;
+
+}
+.ResetBtn{
+  margin-top: 20px;
+  width: 100px;
+   border-radius: 10px;
+  height: 50px;
+  box-shadow: 4px 4px 4px gray;
+}
+.report-sec-btn-hol .btns:hover{
+  color: white;
+  box-shadow: 5px 5px 6px gray;
+  background: #2667FF;
+}
+.report-sec-btn-hol .card{
+  border-radius: 10px;
 }
 @media (max-width:1100px){
     .srch-hol input{

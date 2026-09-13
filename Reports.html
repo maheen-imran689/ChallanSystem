@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>All Challan</title>
+</head>
+<body id="PaymentBody">
+  <div class="container-fluid">
+    <div class="row g-0">
+        <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
+            <div class="d-flex  justify-content-around align-items-center">
+            <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+            <h5 class="text-light sm-font">Traffic Challan <br> Management System</h5>
+            </div>
+            <ul class="mt-5 sidelist-data list-unstyled text-light d-flex flex-column align-items-start">
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gauge-high"></i> <a class="text-light text-decoration-none" href="Dashboard.html"> Dashboard</a></li>
+                <li class="d-flex">
+                    <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-list"></i> Challans
+                    </div>
+                    <div class="mt-1">
+                        <i class="fa-solid fa-angle-down frst-angle-btn"></i>
+                    </div>
+                </li>
+                <ul class="list-unstyled text-light d-none" id="frst-menu">
+                    <li><a href="NewChallan.html" class="text-decoration-none text-light">New Challan</a></li>
+                    <li><a href="allChallan.html" class="text-decoration-none text-light">All Challans</a></li>
+                    <li><a href="SearchChallan.html" class="text-decoration-none text-light">Search Challan</a></li>
+                </ul>
+                <li class="d-flex"> <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-clipboard-check"></i>Violations
+                    </div>
+                 <div class="mt-1">
+                        <i class="fa-solid fa-angle-down scnd-angle-btn"></i>
+                    </div></li>
+                     <ul class="list-unstyled text-light d-none" id="scnd-menu">
+                    <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
+                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                </ul>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+            </ul>
+
+        </div><!--end of frst card-->
+
+        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10 col-xxl-10 main-dashboard-card">
+            <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <!-- bar btn -->
+   <i class="fa-solid fa-bars bar-toggle-btn fs-3"></i>
+    <div class="d-flex gap-4 align-items-center">
+        <i class="fa-regular position-relative fa-bell fs-5"><span class="p-1 bg-danger bj border border-light rounded-circle"></span></i>
+        <div class="d-flex align-items-center gap-3">
+            <img class="profile-img" src="assets/images/prsn-image.png" alt="#">
+            <div class="d-flex flex-column mt-1">
+                <h6 class="sm-font">Admin Office</h6>
+                <p class="text-muted sm-font">Traffic Officer</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>  <!--end of navbar-->
+    <section class="container p-3 main-body-hol">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Reports</a></li>
+    <!-- <li class="breadcrumb-item active" aria-current="page">All Challans</li> -->
+  </ol>
+</nav>
+         <div>
+            <h3 class="fw-bold"><i class="fa-solid fa-solid fa-chart-simple text-primary"></i>  Reports</h3>
+            <p class="text-muted">View and analyze challan data with different date ranges and filters</p>
+         </div>
+         <!-- btn sectioon -->
+        <div class="row report-sec-btn-hol mt-3">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Date Range</h4>
+                        <div class="d-flex align-items-center gap-4 mt-4">
+                            <button class="btn btns px-5">
+                                Today
+                            </button>
+                            <!-- 2 -->
+                              <button class="btn btns px-5">
+                               This Week
+                            </button>
+                            <!-- 3 -->
+                              <button class="btn btns px-5">
+                                This Month
+                            </button>
+                             
+                            <div class="d-flex gap-3 ms-3 mb-3">
+                                <div class="mb-3">
+                                <label for="fromDate" class="form-label">From</label>
+                                <input type="date" class="form-control" id="fromDate">
+                              </div>
+                              <!-- 2 -->
+                                <div class="mb-3">
+                                <label for="toDate" class="form-label">To</label>
+                                <input type="date" class="form-control" id="toDate">
+                              </div>
+                              <!-- 3 -->
+                               <div class="mt-4">
+                               <button class="btn btns" id="apply-btn">
+                                Apply
+                               </button>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Filters</h4>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3">
+                                <label for="violations" class="form-label">Violations</label>
+                                <select class="form-select" id="violations">
+                                 <option value="Violation Status" selected disabled>Violation Status</option>
+                                 <option value="Signal Violation" class="options">Signal Violation</option>
+                                <option value="No helmet" class="options">No Helmet</option>
+                                <option value="Seat belt violation" class="options">SeatBelt Violation</option>
+                                <option value="Wrong-Way Violation" class="options">Wrong-Way Driving</option>
+                               <option value="OverSpeeding" class="options">OverSpeeding</option>
+                               <option value="Illegal Parking" class="options">Illegal Parking</option>
+                                <option value="Driving Without Registration" class="options">Driving Without Registration</option>
+                              </select>
+                              </div>
+                            </div>
+                            <!-- 2 -->
+                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3">
+                                <label for="vehicleType" class="form-label">Vehicle Type</label>
+                                <select class="form-select" id="vehicleType">
+                                <option value="Van">Van</option>
+                                <option value="Car">Car</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Cycle">Cycle</option>
+                                 <option value="Bus">Bus</option>
+                                   <option value="Truck">Truck</option>
+                              </select>
+                              </div>
+                            </div>
+                            <!-- 3 -->
+                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3">
+                                <label for="officers" class="form-label">Officer</label>
+                                <select class="form-select" id="officers">
+                                 <option value="ASI">ASI</option>
+                                <option value="SI">SI</option>
+                                <option value="SP">SP</option>
+                                <option value="DIG">DIG</option>
+                                 <option value="IG">IG</option>
+                              </select>
+                              </div>
+                            </div>
+                            <!-- 4 -->
+                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3">
+                                <label for="city" class="form-label">City</label>
+                                <select class="form-select" id="city">
+                                 <option value="Lahore">Lahore</option>
+                                <option value="Karachi">Karachi</option>
+                                <option value="Gujranwala">Gujranwala</option>
+                                <option value="Sialkot">Sialkot</option>
+                              </select>
+                              </div>
+                            </div>
+                            <!-- 5 -->
+                               <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3">
+                                <label for="PayStatus" class="form-label">Payment Status</label>
+                                <select class="form-select" id="PayStatus">
+                                 <option value="All Status" selected>All Status</option>
+                                <option value="PAID">PAID</option>
+                                <option value="UNPAID">UNPAID</option>
+                                <option value="OVERDUE">OVERDUE</option>
+                              </select>
+                              </div>
+                            </div>
+                            <!-- 6 -->
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="mb-3 d-flex gap-5">
+                                <button class="btn FilterCardbtns">Apply Filters</button>
+                                <button class="btn ResetBtn">Reset</button>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+               <div class="card">
+                <div class="card-body table-responsive">
+                     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Challan No.</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Vehicle No.</th>
+     <th scope="col">Driver Name</th>
+    <th scope="col">Total Fine</th>
+    <th scope="col">Action</th>
+      
+    </tr>
+  </thead>
+  <tbody id="PaymentTable">
+   <!--  render challans data here -->
+  </tbody>
+</table>
+
+            </div>
+                </div>
+               </div>
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 d-flex justify-content-end">
+                <nav>
+                      <ul class="pagination">
+                        <!-- <li class="page-item disabled">
+                          <span class="page-link">Previous</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active" aria-current="page">
+                          <span class="page-link">2</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                        <!-- <li class="page-item">
+                          <a class="page-link" href="#">Next</a>
+                        </li> -->
+                      </ul>
+                    </nav>
+                
+
+               </div>
+        </div>
+      
+        
+            
+    </section>
+        </div> <!--end of scnd card-->
+
+    </div>
+  </div>
+
+
+    <script src="assets/css/bootstrap.bundle.min.js"></script>
+    <script src="assets/css/Script.js"></script>
+</body>
+</html>
