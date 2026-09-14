@@ -962,13 +962,16 @@ if(paymentBody){
 PaymentrenderData(data);
 paginationEngine();
 let searchBtn = document.querySelector('.search-btn2');
+if(searchBtn){
 searchBtn.addEventListener('click',() =>{
     filterByChNmOnpaymentTable();
     let searchInp =  document.querySelector('#ch-nm-inp');
         searchInp.addEventListener('focusin',()=>{
            PaymentrenderData(data);
         })
+
 })
+}
 MovingTowardPaymentPage();
 }
 
@@ -983,31 +986,220 @@ function StoringPaymentInfo(){
     let paymentDate = document.querySelector('#paymentDate').value; 
    let PayValidationPara = document.querySelector('.pay-prompt');
     let chNmSlctd = localStorage.getItem('slctdChNm');
-    if(chllanNM == "" && fineAmount == "" && PaymentMethod == "" && transactionId == "" && paymentDate == "" ) {
-        PayValidationPara.innerText = "Fill all the required Fields"
+    if(chllanNM == "" || fineAmount == "" || PaymentMethod == "" || transactionId == "" || paymentDate == "" ) {
+        PayValidationPara.innerText = "Fill all the required Fields";
+        return ;
     }
-    else{
-     PayValidationPara.innerText = "";   
-    }
-    // console.log(new Date().toLocaleDateString());
-    data.map((e) => {
+        data.forEach((e) => {
         if(e.challanNmber == chllanNM) {
+            e.Payment.ispaid = true;
             e.Payment.status = "Paid";
-            e.Payment.paymentDate = new Date().toLocaleDateString();
+            e.Payment.PaymentDate = paymentDate;
             e.Payment.paymentMethod = PaymentMethod;
+            e.Payment.TransactionId = transactionId;
         }
     })
-    // console.log(data);
     localStorage.setItem('challans',JSON.stringify(data));
-    
-let storedData = JSON.parse(localStorage.getItem("challans"));
-    console.log(storedData);
+  let check = JSON.parse(localStorage.getItem('challans'));
 
+console.log("AFTER SAVING:", check);
+     PayValidationPara.innerText = "";     
 }
+
 if(PaymentFormBody) {
     let PayBtn = document.querySelector('.pay-btn');
     PayBtn.addEventListener('click',(e) =>{
+        e.preventDefault();
 
         StoringPaymentInfo();
     })
 }
+
+
+function DataShowOnTodayClick(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+    console.log(data);
+    let total = document.querySelector('#total');
+    let Paid = document.querySelector('#Paid');
+    let Unpaid = document.querySelector('#Unpaid');
+    let Overdue = document.querySelector('#Overdue');
+    let totalFine = document.querySelector('#totalFine');
+    let CollectedAmount = document.querySelector('#CollectedAmount');
+    let OutstandingAmount = document.querySelector('#OutstandingAmount');
+    let Todaydate = new Date().toISOString().split('T')[0];
+    let ttl =0,paid =0,unpaid =0, overDue =0,TotalFine =0,collectedAmount =0,outstandingAmount =0;
+    data.map((e) =>{
+        if(e.C_Date == Todaydate) {
+            ttl += 1;
+            TotalFine += e.Fine.fine;
+            if(e.Payment.ispaid == true) {
+                paid += 1;
+                collectedAmount += e.Fine.fine;
+            }
+            else{
+                unpaid += 1;
+            }
+            if(e.Payment.status == "OverDue") {
+                overDue+=1;
+            }
+        }
+    })
+    let Remaining = TotalFine - collectedAmount;
+    total.innerText = ttl;
+    Paid.innerText = paid;
+    Unpaid.innerText = unpaid;
+    Overdue.innerText = overDue;
+    totalFine.innerText = TotalFine;
+    CollectedAmount.innerText = collectedAmount;
+    OutstandingAmount.innerText = Remaining;
+}
+function DataShowOnMonthClick(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+    console.log(data);
+    let total = document.querySelector('#total');
+    let Paid = document.querySelector('#Paid');
+    let Unpaid = document.querySelector('#Unpaid');
+    let Overdue = document.querySelector('#Overdue');
+    let totalFine = document.querySelector('#totalFine');
+    let CollectedAmount = document.querySelector('#CollectedAmount');
+    let OutstandingAmount = document.querySelector('#OutstandingAmount');
+    let month = new Date().getMonth()+1;
+    let ttl =0,paid =0,unpaid =0, overDue =0,TotalFine =0,collectedAmount =0,outstandingAmount =0;
+    data.forEach((e) =>{
+        let d = new Date(e.C_Date);
+        if((d.getMonth()+1) == month) {
+            ttl += 1;
+            TotalFine += e.Fine.fine;
+            if(e.Payment.ispaid == true) {
+                paid += 1;
+                collectedAmount += e.Fine.fine;
+            }
+            else{
+                unpaid += 1;
+            }
+            if(e.Payment.status == "OverDue") {
+                overDue+=1;
+            }
+        }
+    })
+    let Remaining = TotalFine - collectedAmount;
+    total.innerText = ttl;
+    Paid.innerText = paid;
+    Unpaid.innerText = unpaid;
+    Overdue.innerText = overDue;
+    totalFine.innerText = TotalFine;
+    CollectedAmount.innerText = collectedAmount;
+    OutstandingAmount.innerText = Remaining;
+}
+function DataShowOnCustomDate(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+    console.log(data);
+    let Date1 = document.querySelector('#fromDate').value;
+    let Date2 = document.querySelector('#toDate').value;
+    let date1 = new Date(Date1);
+    let date2 = new Date(Date2);
+
+    let total = document.querySelector('#total');
+    let Paid = document.querySelector('#Paid');
+    let Unpaid = document.querySelector('#Unpaid');
+    let Overdue = document.querySelector('#Overdue');
+    let totalFine = document.querySelector('#totalFine');
+    let CollectedAmount = document.querySelector('#CollectedAmount');
+    let OutstandingAmount = document.querySelector('#OutstandingAmount');
+    let ttl =0,paid =0,unpaid =0, overDue =0,TotalFine =0,collectedAmount =0;
+    data.forEach((e) =>{
+        let d = new Date(e.C_Date);
+        if(d >= date1 && d<=date2) {
+            ttl += 1;
+            TotalFine += e.Fine.fine;
+            if(e.Payment.ispaid == true) {
+                paid += 1;
+                collectedAmount += e.Fine.fine;
+            }
+            else{
+                unpaid += 1;
+            }
+            if(e.Payment.status == "OverDue") {
+                overDue+=1;
+            }
+        }
+    })
+    let Remaining = TotalFine - collectedAmount;
+    total.innerText = ttl;
+    Paid.innerText = paid;
+    Unpaid.innerText = unpaid;
+    Overdue.innerText = overDue;
+    totalFine.innerText = TotalFine;
+    CollectedAmount.innerText = collectedAmount;
+    OutstandingAmount.innerText = Remaining;
+}
+function DataShowOnFilter(){
+    let data = JSON.parse(localStorage.getItem('challans'));
+    console.log(data);
+    let violations = document.querySelector('#violations').value;
+    let vehicleType = document.querySelector('#vehicleType').value;
+    let officers = document.querySelector('#officers').value;
+    let city = document.querySelector('#city').value;
+    let PayStatus = document.querySelector('#PayStatus').value;
+
+
+    let total = document.querySelector('#total');
+    let Paid = document.querySelector('#Paid');
+    let Unpaid = document.querySelector('#Unpaid');
+    let Overdue = document.querySelector('#Overdue');
+    let totalFine = document.querySelector('#totalFine');
+    let CollectedAmount = document.querySelector('#CollectedAmount');
+    let OutstandingAmount = document.querySelector('#OutstandingAmount');
+    let ttl =0,paid =0,unpaid =0, overDue =0,TotalFine =0,collectedAmount =0;
+    data.forEach((e,index) =>{
+        // let d = new Date(e.C_Date);
+        if(violations == e.Violations[index] && vehicleType == e.VehicleInfo.v_type && officers == e.OfficerInfo.rank && city == e.City && PayStatus == e.Payment.status) {
+            ttl += 1;
+            TotalFine += e.Fine.fine;
+            if(e.Payment.ispaid == true) {
+                paid += 1;
+                collectedAmount += e.Fine.fine;
+            }
+            else{
+                unpaid += 1;
+            }
+            if(e.Payment.status == "OverDue") {
+                overDue+=1;
+            }
+        }
+    })
+    let Remaining = TotalFine - collectedAmount;
+    total.innerText = ttl;
+    Paid.innerText = paid;
+    Unpaid.innerText = unpaid;
+    Overdue.innerText = overDue;
+    totalFine.innerText = TotalFine;
+    CollectedAmount.innerText = collectedAmount;
+    OutstandingAmount.innerText = Remaining;
+}
+
+let ReportBody = document.querySelector('#ReportsBody');
+
+if(ReportBody) {
+    let todaybtn = document.querySelector('.todaybtn');
+    todaybtn.addEventListener('click',()=>{
+        DataShowOnTodayClick();
+    })
+    let mnth = document.querySelector('.month-btn');
+    mnth.addEventListener('click',()=>{
+        DataShowOnMonthClick();
+    })
+     let applyBtn = document.querySelector('#apply-btn');
+    applyBtn.addEventListener('click',()=>{
+       DataShowOnCustomDate();
+    })
+    let filterBtn = document.querySelector('.FilterCardbtns');
+    filterBtn.addEventListener('click',()=>{
+       DataShowOnFilter();
+    })
+
+
+}
+
+let data = JSON.parse(localStorage.getItem('challans'));
+console.log(data);
