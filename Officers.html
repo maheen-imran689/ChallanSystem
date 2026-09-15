@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Officers</title>
+</head>
+<body id="officerPageBody">
+  <div class="container-fluid">
+    <div class="row g-0">
+        <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
+            <div class="d-flex  justify-content-around align-items-center">
+            <img class="logo-img" src="assets/images/logo-img.png" alt="#">
+            <h5 class="text-light sm-font">Traffic Challan <br> Management System</h5>
+            </div>
+            <ul class="mt-5 sidelist-data list-unstyled text-light d-flex flex-column align-items-start">
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gauge-high"></i> <a class="text-light text-decoration-none" href="Dashboard.html"> Dashboard</a></li>
+                <li class="d-flex">
+                    <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-list"></i> Challans
+                    </div>
+                    <div class="mt-1">
+                        <i class="fa-solid fa-angle-down frst-angle-btn"></i>
+                    </div>
+                </li>
+                <ul class="list-unstyled text-light d-none" id="frst-menu">
+                    <li><a href="NewChallan.html" class="text-decoration-none text-light">New Challan</a></li>
+                    <li><a href="allChallan.html" class="text-decoration-none text-light">All Challans</a></li>
+                    <li><a href="SearchChallan.html" class="text-decoration-none text-light">Search Challan</a></li>
+                </ul>
+                <li class="d-flex"> <div class="d-flex gap-2 align-items-center">
+                    <i class="fa-solid fa-clipboard-check"></i>Violations
+                    </div>
+                 <div class="mt-1">
+                        <i class="fa-solid fa-angle-down scnd-angle-btn"></i>
+                    </div></li>
+                     <ul class="list-unstyled text-light d-none" id="scnd-menu">
+                    <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
+                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                </ul>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
+                <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+            </ul>
+
+        </div><!--end of frst card-->
+
+        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10 col-xxl-10 main-dashboard-card">
+            <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <!-- bar btn -->
+   <i class="fa-solid fa-bars bar-toggle-btn fs-3"></i>
+    <div class="d-flex gap-4 align-items-center">
+        <i class="fa-regular position-relative fa-bell fs-5"><span class="p-1 bg-danger bj border border-light rounded-circle"></span></i>
+        <div class="d-flex align-items-center gap-3">
+            <img class="profile-img" src="assets/images/prsn-image.png" alt="#">
+            <div class="d-flex flex-column mt-1">
+                <h6 class="sm-font">Admin Office</h6>
+                <p class="text-muted sm-font">Traffic Officer</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>  <!--end of navbar-->
+    <section class="container p-3 main-body-hol">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Officers</a></li>
+   
+  </ol>
+</nav>
+         <div class="d-flex justify-content-between">
+            <h3 class="fw-bold">Officers</h3>
+            <button class="btn text-light new_challan_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Officer</button>
+         </div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Officer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h4 class="text-danger text-center validationHdng"></h4>
+        <form action="#">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="officerName" class="form-label">Officer Name</label>
+                      <input type="text" class="form-control" id="officerName" >
+                    </div>
+                    </div>
+                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="rank" class="form-label">Rank</label>
+                      <input type="text" class="form-control" id="rank" >
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="beltNm" class="form-label">Belt Number</label>
+                      <input type="text" class="form-control" id="beltNm" >
+                    </div>
+                    </div>
+                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="Sector" class="form-label">Sector</label>
+                      <input type="text" class="form-control" id="Sector" >
+                    </div>
+                </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="status" class="form-label">Status</label>
+                      <input type="text" class="form-control" id="status" >
+                    </div>
+                    </div>
+
+
+                <!-- </div> -->
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary officerAddBtn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+         <!-- btn sectioon -->
+        <div class="row mt-3">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                 <div class="input-group">
+                  <input type="text" class="form-control p-3" id="ch-nm-inp" placeholder="Search By Challan Number ..." >
+                   <button class="btn btn-outline-secondary srch-btn" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
+               </div>
+                    
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                <select class="form-select p-3" name="violations" id="violation-status">
+                    <option value="Violation Status" selected disabled>Violation Status</option>
+                    <option value="Signal Violation" class="options">Signal Violation</option>
+                    <option value="No helmet" class="options">No Helmet</option>
+                    <option value="Seat belt violation" class="options">SeatBelt Violation</option>
+                    <option value="Wrong-Way Violation" class="options">Wrong-Way Driving</option>
+                    <option value="OverSpeeding" class="options">OverSpeeding</option>
+                    <option value="Illegal Parking" class="options">Illegal Parking</option>
+                    <option value="Driving Without Registration" class="options">Driving Without Registration</option>
+                </select>
+                </div>
+
+
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+               <div class="card">
+                <div class="card-body table-responsive">
+                     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Officer Name</th>
+      <th scope="col">Belt Number</th>
+      <th scope="col">Rank</th>
+      <th scope="col">Sector</th>
+     <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  <tbody id="Officertable">
+   <!--  render challans data here -->
+  </tbody>
+</table>
+
+            </div>
+                </div>
+               </div>
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 d-flex justify-content-end">
+                <nav>
+                      <ul class="pagination">
+                        <!-- <li class="page-item disabled">
+                          <span class="page-link">Previous</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active" aria-current="page">
+                          <span class="page-link">2</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                        <!-- <li class="page-item">
+                          <a class="page-link" href="#">Next</a>
+                        </li> -->
+                      </ul>
+                    </nav>
+                
+
+               </div>
+        </div>
+      
+        
+            
+    </section>
+        </div> <!--end of scnd card-->
+
+    </div>
+  </div>
+
+
+    <script src="assets/css/bootstrap.bundle.min.js"></script>
+    <script src="assets/css/Script.js"></script>
+</body>
+</html>

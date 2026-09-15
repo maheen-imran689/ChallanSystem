@@ -1201,5 +1201,82 @@ if(ReportBody) {
 
 }
 
-let data = JSON.parse(localStorage.getItem('challans'));
-console.log(data);
+let defaultofficers = [
+    {
+        name:'Arif',
+        rank:'IG',
+        beltNm:'0-1273',
+        sector:'raiwind Sector',
+        status:'active'
+    }
+]
+let officers =
+    JSON.parse(localStorage.getItem("officers")) || defaultofficers;
+
+    // console.log(officers);
+
+    function ValidationForOfficerDetail(){
+        let obj ={};
+        let regexForBeltnm =/(\d{1})-(\d{4})$/;
+        let beltNm = document.querySelector('#beltNm').value;
+        let Sector = document.querySelector('#Sector').value;
+        let rank = document.querySelector('#rank').value;
+        let officerName = document.querySelector('#officerName').value;
+        let status = document.querySelector('#status').value;
+
+        let validationHdng = document.querySelector('.validationHdng');
+        
+        if(beltNm == "" || Sector == "" || rank == "" || officerName == "" || status == ""){
+            validationHdng.innerText = 'Fill all fields accurately';
+        }
+        else{
+    if(regexForBeltnm.test(beltNm)){
+             obj.name = officerName;
+             obj.rank = rank;
+             obj.beltNm = beltNm;
+             obj.sector = Sector;
+             obj.status =status;
+            officers.push(obj);
+             localStorage.setItem('officers',JSON.stringify(officers));
+            validationHdng.innerText = "Officer Data Added";
+    }
+    else{
+          validationHdng.innerText = "Invalid Belt Number";
+    }
+        }
+      
+    }
+function renderOfficersData(){
+    let Officertable = document.querySelector('#Officertable');
+     let dta = JSON.parse(localStorage.getItem('officers'));  
+     let id=0;
+     let addData = dta.map((e) =>{
+        id++;
+            return `<tr>
+            <td>${id}</td>
+            <td>${e.name}</td>
+            <td>${e.beltNm}</td>
+            <td>${e.rank}</td>
+             <td>${e.sector}</td>
+              <td>${e.status}</td>
+            </tr>`
+        })
+      Officertable.innerHTML = addData.join("");
+        console.log(dta);
+
+
+    }
+let officerPageBody = document.querySelector('#officerPageBody');
+if(officerPageBody){
+  
+    let officerAddBtn = document.querySelector('.officerAddBtn');
+    if(officerAddBtn){
+    officerAddBtn.addEventListener('click',() =>{
+        ValidationForOfficerDetail();
+    })
+}
+renderOfficersData();
+}
+
+//  let dta = JSON.parse(localStorage.getItem('officers'));
+//  console.log(dta);
