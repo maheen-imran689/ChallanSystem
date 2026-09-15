@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>All Challan</title>
+    <title>Violaton List</title>
 </head>
-<body id="PaymentBody">
+<body id="ViolationPageBody">
   <div class="container-fluid">
     <div class="row g-0">
         <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar">
@@ -70,23 +70,81 @@
     <section class="container p-3 main-body-hol">
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Payments</a></li>
-    <!-- <li class="breadcrumb-item active" aria-current="page">All Challans</li> -->
+    <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Violation List</a></li>
+   
   </ol>
 </nav>
          <div class="d-flex justify-content-between">
-            <h3 class="fw-bold">Payments</h3>
-            <!-- <button class="btn new_challan_btn"> <a href="NewChallan.html" class="text-decoration-none text-light"> + New Challan</a></button> -->
+            <h3 class="fw-bold">Violation List</h3>
+            <button class="btn text-light new_violation_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add Violation</button>
          </div>
-         <!-- btn sectioon -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Officer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h4 class="text-danger text-center validationHdng"></h4>
+        <form action="#">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="officerName" class="form-label">Officer Name</label>
+                      <input type="text" class="form-control" id="officerName" >
+                    </div>
+                    </div>
+                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="rank" class="form-label">Rank</label>
+                      <input type="text" class="form-control" id="rank" >
+                    </div>
+                    </div>
+                  
+                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="Sector" class="form-label">Sector</label>
+                      <input type="text" class="form-control" id="Sector" >
+                    </div>
+                </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="status" class="form-label">Status</label>
+                      <input type="text" class="form-control" id="status" >
+                    </div>
+                    </div>
+
+
+                <!-- </div> -->
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary officerAddBtn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+         <!-- btn section -->
         <div class="row mt-3">
             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                  <div class="input-group">
-                  <input type="text" class="form-control p-3" id="ch-nm-inp" placeholder="Search By Challan Number ..." >
-                   <button class="btn btn-outline-secondary search-btn2" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
+                  <input type="text" class="form-control p-3" id="blt-nm-inp" placeholder="Search By Belt Number ..." >
+                   <button class="btn btn-outline-secondary blt-srch-btn" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
                </div>
                     
             </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                <select class="form-select p-3" name="AvailableStatus" id="AvailableStatus">
+                    <option value="Status" selected disabled>Status</option>
+                    <option value="active" class="options">active</option>
+                    <option value="inactive" class="options">inactive</option>
+                </select>
+                </div>
+
 
         </div>
         <div class="row mt-2">
@@ -97,17 +155,18 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Challan No.</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Vehicle No.</th>
-     <th scope="col">Driver Name</th>
-    <th scope="col">Total Fine</th>
-    <th scope="col">Action</th>
+      <th scope="col">Violation ID</th>
+      <th scope="col">Violation Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Jurisdiction</th>
+     <th scope="col">Fine Amount</th>
+     <th scope="col">Status</th>
+      <th scope="col">Effective Date</th>
+     <th scope="col">Actions</th>
       
     </tr>
   </thead>
-  <tbody id="PaymentTable">
+  <tbody id="ViolationListTable">
    <!--  render challans data here -->
   </tbody>
 </table>
@@ -146,7 +205,7 @@
 
 
     <script src="assets/css/bootstrap.bundle.min.js"></script>
-    <script src="assets/css/Script.js"></script>
+    <script src="assets/css/ViolationList.js"></script>
     <script src="assets/css/ButtonsDropDowns.js"></script>
 </body>
 </html>

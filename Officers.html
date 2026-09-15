@@ -102,12 +102,7 @@
                       <input type="text" class="form-control" id="rank" >
                     </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                    <div class="mb-3">
-                      <label for="beltNm" class="form-label">Belt Number</label>
-                      <input type="text" class="form-control" id="beltNm" >
-                    </div>
-                    </div>
+                  
                       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="mb-3">
                       <label for="Sector" class="form-label">Sector</label>
@@ -133,25 +128,20 @@
     </div>
   </div>
 </div>
-         <!-- btn sectioon -->
+         <!-- btn section -->
         <div class="row mt-3">
             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                  <div class="input-group">
-                  <input type="text" class="form-control p-3" id="ch-nm-inp" placeholder="Search By Challan Number ..." >
-                   <button class="btn btn-outline-secondary srch-btn" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
+                  <input type="text" class="form-control p-3" id="blt-nm-inp" placeholder="Search By Belt Number ..." >
+                   <button class="btn btn-outline-secondary blt-srch-btn" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
                </div>
                     
             </div>
             <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
-                <select class="form-select p-3" name="violations" id="violation-status">
-                    <option value="Violation Status" selected disabled>Violation Status</option>
-                    <option value="Signal Violation" class="options">Signal Violation</option>
-                    <option value="No helmet" class="options">No Helmet</option>
-                    <option value="Seat belt violation" class="options">SeatBelt Violation</option>
-                    <option value="Wrong-Way Violation" class="options">Wrong-Way Driving</option>
-                    <option value="OverSpeeding" class="options">OverSpeeding</option>
-                    <option value="Illegal Parking" class="options">Illegal Parking</option>
-                    <option value="Driving Without Registration" class="options">Driving Without Registration</option>
+                <select class="form-select p-3" name="AvailableStatus" id="AvailableStatus">
+                    <option value="Status" selected disabled>Status</option>
+                    <option value="active" class="options">active</option>
+                    <option value="inactive" class="options">inactive</option>
                 </select>
                 </div>
 
@@ -170,6 +160,7 @@
       <th scope="col">Rank</th>
       <th scope="col">Sector</th>
      <th scope="col">Status</th>
+     <th scope="col">Action</th>
       
     </tr>
   </thead>
@@ -212,6 +203,7 @@
 
 
     <script src="assets/css/bootstrap.bundle.min.js"></script>
-    <script src="assets/css/Script.js"></script>
+    <script src="assets/css/officers.js"></script>
+    <script src="assets/css/ButtonsDropDowns.js"></script>
 </body>
 </html>

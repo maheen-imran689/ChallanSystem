@@ -47,41 +47,7 @@ const defaultchallans = [
 
 let challans =
     JSON.parse(localStorage.getItem("challans")) || defaultchallans;
-let frst_dropdown_btn = document.querySelector('.frst-angle-btn');
-let scnd_dropdown_btn = document.querySelector('.scnd-angle-btn');
-let frst_menu = document.getElementById('frst-menu');
-let scnd_menu = document.getElementById('scnd-menu');
-if(frst_dropdown_btn){
-frst_dropdown_btn.addEventListener('click',()=>{
-       frst_menu.classList.toggle('d-none');
-});
-}
-// second dropdown menu
-if(scnd_dropdown_btn){
-scnd_dropdown_btn.addEventListener('click',()=>{
-       scnd_menu.classList.toggle('d-none');
-});
-}
-let sidebar = document.querySelector('.sidebar');
-let toggle_btn = document.querySelector('.bar-toggle-btn');
-let  dashboard_menu = document.querySelector('.main-dashboard-card');
-let table = document.querySelector('.table-body');
-if(toggle_btn){
-toggle_btn.addEventListener('click',()=>{
-    sidebar.classList.toggle('d-none');
-//    dashboard_menu.classList.add('widtth');
-if(['col-8','col-sm-8','col-md-10','col-lg-10', 'col-xl-10', 'col-xxl-10'].every(chk => dashboard_menu.classList.contains(chk) )
-    )
-{
-    dashboard_menu.classList.remove('col-8','col-sm-8','col-md-10','col-lg-10', 'col-xl-10', 'col-xxl-10');
-    dashboard_menu.classList.add('col-12','col-sm-12','col-md-12','col-lg-12', 'col-xl-12', 'col-xxl-12');
-}
-else{
-     dashboard_menu.classList.add('col-8','col-sm-8','col-md-10','col-lg-10', 'col-xl-10', 'col-xxl-10');
-    dashboard_menu.classList.remove('col-12','col-sm-12','col-md-12','col-lg-12', 'col-xl-12', 'col-xxl-12');
-}
-});
-}
+
 let dashboardBody = document.querySelector('#dashboardBody');
 function DataForDashboard(){
     let getDataForDashboard = JSON.parse(localStorage.getItem("challans"));
@@ -642,7 +608,7 @@ function filterByViolationStatus(optionValue){
 function DataShowOnEyeIconClick(){
    
    let nmber = localStorage.getItem('selectedChallanNumber');
-   console.log(typeof(nmber));
+//    console.log(typeof(nmber));
  let dta =JSON.parse(localStorage.getItem("challans"));
     let table_violation = document.querySelector('#tble-body');
     let fine_card = document.querySelector('#fine-card');
@@ -728,7 +694,9 @@ function DataRemoveOnTrashIconClick(){
         }
     })
 }
-if(table_for_challans){
+
+let allChallanBody = document.querySelector('#allChallanBody');
+if(allChallanBody){
     paginationNumberBtns();
      let crntPageNm;
      paginationEngine();
@@ -753,7 +721,7 @@ if(table_for_challans){
 
         let searchInp =  document.querySelector('#ch-nm-inp');
         searchInp.addEventListener('focusin',()=>{
-            renderDaata();
+             paginationEngine();
         })
     });
     DataRemoveOnTrashIconClick();
@@ -1201,82 +1169,83 @@ if(ReportBody) {
 
 }
 
-let defaultofficers = [
-    {
-        name:'Arif',
-        rank:'IG',
-        beltNm:'0-1273',
-        sector:'raiwind Sector',
-        status:'active'
-    }
-]
-let officers =
-    JSON.parse(localStorage.getItem("officers")) || defaultofficers;
+// let defaultofficers = [
+//     {
+//         name:'Arif',
+//         rank:'IG',
+//         beltNm:'0-1273',
+//         sector:'raiwind Sector',
+//         status:'active'
+//     }
+// ]
+// let officers =
+//     JSON.parse(localStorage.getItem("officers")) || defaultofficers;
 
-    // console.log(officers);
 
-    function ValidationForOfficerDetail(){
-        let obj ={};
-        let regexForBeltnm =/(\d{1})-(\d{4})$/;
-        let beltNm = document.querySelector('#beltNm').value;
-        let Sector = document.querySelector('#Sector').value;
-        let rank = document.querySelector('#rank').value;
-        let officerName = document.querySelector('#officerName').value;
-        let status = document.querySelector('#status').value;
+//     function ValidationForOfficerDetail(){
+//         let obj ={};
+//         let regexForBeltnm =/(\d{1})-(\d{4})$/;
+//         let beltNm = document.querySelector('#beltNm').value;
+//         let Sector = document.querySelector('#Sector').value;
+//         let rank = document.querySelector('#rank').value;
+//         let officerName = document.querySelector('#officerName').value;
+//         let status = document.querySelector('#status').value;
 
-        let validationHdng = document.querySelector('.validationHdng');
+//         let validationHdng = document.querySelector('.validationHdng');
         
-        if(beltNm == "" || Sector == "" || rank == "" || officerName == "" || status == ""){
-            validationHdng.innerText = 'Fill all fields accurately';
-        }
-        else{
-    if(regexForBeltnm.test(beltNm)){
-             obj.name = officerName;
-             obj.rank = rank;
-             obj.beltNm = beltNm;
-             obj.sector = Sector;
-             obj.status =status;
-            officers.push(obj);
-             localStorage.setItem('officers',JSON.stringify(officers));
-            validationHdng.innerText = "Officer Data Added";
-    }
-    else{
-          validationHdng.innerText = "Invalid Belt Number";
-    }
-        }
+//         if(beltNm == "" || Sector == "" || rank == "" || officerName == "" || status == ""){
+//             validationHdng.innerText = 'Fill all fields accurately';
+//         }
+//         else{
+//     if(regexForBeltnm.test(beltNm)){
+//              obj.name = officerName;
+//              obj.rank = rank;
+//              obj.beltNm = beltNm;
+//              obj.sector = Sector;
+//              obj.status =status;
+//             officers.push(obj);
+//              localStorage.setItem('officers',JSON.stringify(officers));
+//             validationHdng.innerText = "Officer Data Added";
+//     }
+//     else{
+//           validationHdng.innerText = "Invalid Belt Number";
+//     }
+//         }
       
-    }
-function renderOfficersData(){
-    let Officertable = document.querySelector('#Officertable');
-     let dta = JSON.parse(localStorage.getItem('officers'));  
-     let id=0;
-     let addData = dta.map((e) =>{
-        id++;
-            return `<tr>
-            <td>${id}</td>
-            <td>${e.name}</td>
-            <td>${e.beltNm}</td>
-            <td>${e.rank}</td>
-             <td>${e.sector}</td>
-              <td>${e.status}</td>
-            </tr>`
-        })
-      Officertable.innerHTML = addData.join("");
-        console.log(dta);
+//     }
+// function renderOfficersData(){
+//     let Officertable = document.querySelector('#Officertable');
+//      let dta = JSON.parse(localStorage.getItem('officers'));  
+//      let id=0;
+//      let addData = dta.map((e) =>{
+//         id++;
+//             return `<tr>
+//             <td class="t-row">${id}</td>
+//             <td>${e.name}</td>
+//             <td>${e.beltNm}</td>
+//             <td>${e.rank}</td>
+//              <td>${e.sector}</td>
+//               <td>${e.status}</td>
+//               <td class="d-flex gap-2"><i class="fa-solid fa-eye text-primary"></i><i class="fa-solid fa-pen text-success"></i><i class="fa-solid fa-trash text-danger"></i></td>
+//             </tr>`
+//         })
+//       Officertable.innerHTML = addData.join("");
+//         console.log(dta);
 
 
-    }
-let officerPageBody = document.querySelector('#officerPageBody');
-if(officerPageBody){
+//     }
+
+// let officerPageBody = document.querySelector('#officerPageBody');
+// if(officerPageBody){
   
-    let officerAddBtn = document.querySelector('.officerAddBtn');
-    if(officerAddBtn){
-    officerAddBtn.addEventListener('click',() =>{
-        ValidationForOfficerDetail();
-    })
-}
-renderOfficersData();
-}
+//     let officerAddBtn = document.querySelector('.officerAddBtn');
+//     if(officerAddBtn){
+//     officerAddBtn.addEventListener('click',() =>{
+//         ValidationForOfficerDetail();
+//     })
+// }
+// renderOfficersData();
+// }
 
 //  let dta = JSON.parse(localStorage.getItem('officers'));
 //  console.log(dta);
