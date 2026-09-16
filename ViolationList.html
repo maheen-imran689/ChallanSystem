@@ -39,13 +39,13 @@
                     </div></li>
                      <ul class="list-unstyled text-light d-none" id="scnd-menu">
                     <li><a href="ViolationList.html" class="text-decoration-none text-light">Violation List</a></li>
-                    <li><a href="FineManagement.html" class="text-decoration-none text-light">Fine Management</a></li>
+                    
                 </ul>
                 <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-credit-card"></i><a href="Payments.html" class="text-decoration-none text-light">Payment</a></li>
                 <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-chart-column"></i><a href="Reports.html" class="text-decoration-none text-light">Reports</a></li>
                 <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user"></i><a href="Officers.html" class="text-decoration-none text-light">Officers</a></li>
                 <li class="d-flex gap-2 align-items-center"><i class="fa-solid fa-gear"></i><a href="Settings.html" class="text-decoration-none text-light">Settings</a></li>
-                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="Logout.html" class="text-decoration-none text-light">Logout</a></li>
+                <li class="d-flex gap-2 align-items-center text-danger"><i class="fa-solid fa-right-from-bracket"></i><a href="index.html" class="text-decoration-none text-danger">Logout</a></li>
             </ul>
 
         </div><!--end of frst card-->
@@ -83,30 +83,30 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add Officer</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Add Violation</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <h4 class="text-danger text-center validationHdng"></h4>
+          <h4 class="text-danger text-center violationValidationHdng"></h4>
         <form action="#">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="mb-3">
-                      <label for="officerName" class="form-label">Officer Name</label>
-                      <input type="text" class="form-control" id="officerName" >
+                      <label for="name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="name" >
                     </div>
                     </div>
                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="mb-3">
-                      <label for="rank" class="form-label">Rank</label>
-                      <input type="text" class="form-control" id="rank" >
+                      <label for="category" class="form-label">Category</label>
+                      <input type="text" class="form-control" id="category" >
                     </div>
                     </div>
                   
                       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="mb-3">
-                      <label for="Sector" class="form-label">Sector</label>
-                      <input type="text" class="form-control" id="Sector" >
+                      <label for="jurisdiction" class="form-label">Jurisdiction</label>
+                      <input type="text" class="form-control" id="jurisdiction" >
                     </div>
                 </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
@@ -115,7 +115,14 @@
                       <input type="text" class="form-control" id="status" >
                     </div>
                     </div>
-
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="mb-3">
+                      <label for="fineAmount" class="form-label">Fine Amount</label>
+                      <input type="text" class="form-control" id="fineAmount" >
+                    </div>
+                    <p class="text-danger validationForFine"></p>
+                    </div>
+                  
 
                 <!-- </div> -->
             </div>
@@ -123,20 +130,39 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary officerAddBtn">Add</button>
+        <button type="button" class="btn btn-primary violationAddBtn">Add</button>
       </div>
     </div>
   </div>
 </div>
          <!-- btn section -->
         <div class="row mt-3">
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                 <div class="input-group">
-                  <input type="text" class="form-control p-3" id="blt-nm-inp" placeholder="Search By Belt Number ..." >
-                   <button class="btn btn-outline-secondary blt-srch-btn" type="button" id="button-addon2"><i class="fa-solid fa-search"></i></button>
-               </div>
-                    
-            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                <select class="form-select p-3" name="Searchcategory" id="Searchcategory">
+                    <option value="Category" selected disabled>Category</option>
+                    <option value="Driving" class="options">Driving</option>
+                    <option value="TrafficSignal" class="options">Traffic Signal</option>
+                    <option value="Speed" class="options">Speed</option>
+                    <option value="Motorcycle" class="options">Motorcycle</option>
+                    <option value="VehicleDocumentation" class="options">Vehicle Documentation</option>
+                    <option value="Safety" class="options">Safety</option>
+                    <option value="Parking" class="options">Parking</option> 
+                    <option value="PublicTransport" class="options">Public Transport</option>
+                    <option value="VehicleCondition" class="options">Vehicle Condition</option>
+
+                </select>
+                </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                <select class="form-select p-3" name="Jurisdiction" id="Jurisdiction">
+                    <option value="Status" selected disabled>Jurisdiction</option>
+                    <option value="Punjab" class="options">Punjab</option>
+                    <option value="Balochistan" class="options">Balochistan</option>
+                    <option value="KPK" class="options">KPK</option>
+                    <option value="IslamabadCapitalTerritory" class="options">Islamabad Capital Territory</option>
+                    <option value="Sindh" class="options">Sindh</option>
+
+                </select>
+                </div>
             <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
                 <select class="form-select p-3" name="AvailableStatus" id="AvailableStatus">
                     <option value="Status" selected disabled>Status</option>

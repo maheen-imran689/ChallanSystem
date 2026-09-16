@@ -15,7 +15,10 @@ const defaultchallans = [
             Cnic: "35202-9006056-2",
             LicenseNumber:"aa-1004-19875"
         },
-
+        Payment:{
+            ispaid:false,
+            status:'unpaid'
+        },
         Fine: {
             fines: [2000, 2000],
             fine: 4000
@@ -44,12 +47,12 @@ const defaultchallans = [
     },
       
 ];
-
 let challans =
     JSON.parse(localStorage.getItem("challans")) || defaultchallans;
-
+localStorage.setItem("challans", JSON.stringify(challans));
 let dashboardBody = document.querySelector('#dashboardBody');
 function DataForDashboard(){
+    let table = document.querySelector('.table-body');
     let getDataForDashboard = JSON.parse(localStorage.getItem("challans"));
     let slicedData = getDataForDashboard.slice(0,7);
     let id=0;
@@ -58,7 +61,7 @@ function DataForDashboard(){
       return `<tr>
         <th scope="row">${id}</th>
         <td>${e.challanNmber}</td>
-        <td>${e.VehicleInfo.v_registration_no}</td>
+        <td class =${e.Payment?.ispaid == true?"text-success":e.Payment?.status.toLowerCase() == "unpaid"?"text-danger":"text-warning"} >${e.Payment?.status}</td>
         <td>${e.DriverInformation.D_Name}</td>
         <td>${e.Violations[0]}</td>
         <td>${e.Fine?.fine}</td>
@@ -111,14 +114,16 @@ function paymentFeatureAdd(){
   localStorage.setItem("challans", JSON.stringify(data));
 
 }
-paymentFeatureAdd();
+// paymentFeatureAdd();
 
 function UnpaidChallans() {
     let unpaidCard = document.querySelector('#unpaidCardValue');
     let count = 0;
     let data = JSON.parse(localStorage.getItem('challans'));
+    console.log(data);
   data.forEach((e) =>{ 
-        if(e.Payment.ispaid == false){
+    console.log(e.Payment?.ispaid);
+        if(e?.Payment.ispaid == false){
             count++;
         }
         
@@ -141,13 +146,17 @@ function paidChallans() {
 function totalFineOfChallans() {
     let TotalFineCard = document.querySelector('#totalFineCardValue');
      let fineCollected = document.querySelector('#fineCollectedCardValue');
-    let sum = 0;
+    let sum = 0,sum2 =0;
     let data = JSON.parse(localStorage.getItem('challans'));
   data.forEach((e) =>{ 
         sum+=e.Fine.fine;
+        if(e.Payment.ispaid == true){
+            sum2+=e.Fine.fine;
+        }
         
     })
-    fineCollected.innerText = 0;
+    
+    fineCollected.innerText = sum2;
       TotalFineCard.innerText = sum;
 
 }
@@ -367,9 +376,12 @@ function validation(){
    let OV =  OfficerValidation(newObj);
 
              fineCalculation(newObj);
-
+     
    let challan_nm = RandomChallanNumGenerator();
     newObj.challanNmber = challan_nm;
+    newObj.Payment = {};
+    newObj.Payment.ispaid = false;
+    newObj.Payment.status = "unpaid";
    if(CI && DI && SV && VV && OV){
     return newObj;
    }
@@ -399,6 +411,7 @@ let PreviewBtn = document.querySelector('.Preview-btn');
 if(PreviewBtn){
 PreviewBtn.addEventListener('click',()=>{
    let newObj =  validation();
+
    if(!newObj){
          return;
      }
@@ -439,9 +452,11 @@ function dataOnNewChallan(){
     let table_violation = document.querySelector('#tble-body');
     let fine_card = document.querySelector('#fine-card');
     let print_btn = document.querySelector('.print-btn');
+    if(print_btn){
     print_btn.addEventListener('click',()=>{
         window.print();
     })
+}
 
     let violation = dta.Violations;
     let array_of_fines = dta.Fine?.fines;
@@ -676,10 +691,9 @@ function DataRemoveOnTrashIconClick(){
         if(source == "eyeBtn" ){
             DataShowOnEyeIconClick();
         }
-        else{
-            
-            dataOnNewChallan();
-        }
+            if(source == "previewBtn"){
+                dataOnNewChallan();
+            }
      }
  function Latest(){
      table_for_challans.addEventListener('click',(e)=>{
@@ -946,14 +960,13 @@ MovingTowardPaymentPage();
 let PaymentFormBody = document.querySelector('#PaymentFormBody');
 function StoringPaymentInfo(){
     let data = JSON.parse(localStorage.getItem('challans'));
-
     let chllanNM = document.querySelector('#chllanNM').value;
     let fineAmount = document.querySelector('#fineAmount').value;
     let PaymentMethod = document.querySelector('#PaymentMethod').value;
     let transactionId = document.querySelector('#transactionId').value;
     let paymentDate = document.querySelector('#paymentDate').value; 
    let PayValidationPara = document.querySelector('.pay-prompt');
-    let chNmSlctd = localStorage.getItem('slctdChNm');
+    // let chNmSlctd = localStorage.getItem('slctdChNm');
     if(chllanNM == "" || fineAmount == "" || PaymentMethod == "" || transactionId == "" || paymentDate == "" ) {
         PayValidationPara.innerText = "Fill all the required Fields";
         return ;
@@ -971,7 +984,7 @@ function StoringPaymentInfo(){
   let check = JSON.parse(localStorage.getItem('challans'));
 
 console.log("AFTER SAVING:", check);
-     PayValidationPara.innerText = "";     
+     PayValidationPara.innerText = "Challan Paid Successfully";     
 }
 
 if(PaymentFormBody) {
@@ -1169,83 +1182,4 @@ if(ReportBody) {
 
 }
 
-// let defaultofficers = [
-//     {
-//         name:'Arif',
-//         rank:'IG',
-//         beltNm:'0-1273',
-//         sector:'raiwind Sector',
-//         status:'active'
-//     }
-// ]
-// let officers =
-//     JSON.parse(localStorage.getItem("officers")) || defaultofficers;
 
-
-//     function ValidationForOfficerDetail(){
-//         let obj ={};
-//         let regexForBeltnm =/(\d{1})-(\d{4})$/;
-//         let beltNm = document.querySelector('#beltNm').value;
-//         let Sector = document.querySelector('#Sector').value;
-//         let rank = document.querySelector('#rank').value;
-//         let officerName = document.querySelector('#officerName').value;
-//         let status = document.querySelector('#status').value;
-
-//         let validationHdng = document.querySelector('.validationHdng');
-        
-//         if(beltNm == "" || Sector == "" || rank == "" || officerName == "" || status == ""){
-//             validationHdng.innerText = 'Fill all fields accurately';
-//         }
-//         else{
-//     if(regexForBeltnm.test(beltNm)){
-//              obj.name = officerName;
-//              obj.rank = rank;
-//              obj.beltNm = beltNm;
-//              obj.sector = Sector;
-//              obj.status =status;
-//             officers.push(obj);
-//              localStorage.setItem('officers',JSON.stringify(officers));
-//             validationHdng.innerText = "Officer Data Added";
-//     }
-//     else{
-//           validationHdng.innerText = "Invalid Belt Number";
-//     }
-//         }
-      
-//     }
-// function renderOfficersData(){
-//     let Officertable = document.querySelector('#Officertable');
-//      let dta = JSON.parse(localStorage.getItem('officers'));  
-//      let id=0;
-//      let addData = dta.map((e) =>{
-//         id++;
-//             return `<tr>
-//             <td class="t-row">${id}</td>
-//             <td>${e.name}</td>
-//             <td>${e.beltNm}</td>
-//             <td>${e.rank}</td>
-//              <td>${e.sector}</td>
-//               <td>${e.status}</td>
-//               <td class="d-flex gap-2"><i class="fa-solid fa-eye text-primary"></i><i class="fa-solid fa-pen text-success"></i><i class="fa-solid fa-trash text-danger"></i></td>
-//             </tr>`
-//         })
-//       Officertable.innerHTML = addData.join("");
-//         console.log(dta);
-
-
-//     }
-
-// let officerPageBody = document.querySelector('#officerPageBody');
-// if(officerPageBody){
-  
-//     let officerAddBtn = document.querySelector('.officerAddBtn');
-//     if(officerAddBtn){
-//     officerAddBtn.addEventListener('click',() =>{
-//         ValidationForOfficerDetail();
-//     })
-// }
-// renderOfficersData();
-// }
-
-//  let dta = JSON.parse(localStorage.getItem('officers'));
-//  console.log(dta);

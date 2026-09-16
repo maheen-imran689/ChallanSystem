@@ -33,3 +33,75 @@ else{
 }
 });
 }
+let loginInfo ={
+       userName:'admin',
+       password:'1234'
+};
+if (localStorage.getItem("loginInfo") == null) {
+    localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+}
+function LoginInfo(){
+     let data = JSON.parse(localStorage.getItem("loginInfo"));
+    let Password = document.querySelector('#Password').value;
+    let username = document.querySelector('#username').value;
+    console.log(username);
+    console.log(Password);
+    let warningPara = document.querySelector('.warning-para');
+    if(Password == "" && username == ""){
+        warningPara.innerText = "Fill the required Crediantals";
+    }
+     if(data.userName == username && data.password == Password){
+        window.location.href ="Dashboard.html";
+     }
+     else{
+         warningPara.innerText = "Invalid Crediantals";
+     }
+      warningPara.innerText = "";
+}
+let loginPage = document.querySelector('#loginPage');
+if(loginPage) {
+let loginBtn = document.querySelector('.loginBtn');
+loginBtn.addEventListener('click',(e) =>{
+    e.preventDefault();
+    LoginInfo();
+})
+
+}
+
+function ChngePassAndUsername() {
+     let data = JSON.parse(localStorage.getItem("loginInfo"));
+      let Password = document.querySelector('#chngePassword').value;
+      let username = document.querySelector('#chngeusername').value;
+      let pswrdchngWarning = document.querySelector('.pswrdchng-warning');
+      if(Password == "" && username == "") {
+           pswrdchngWarning.innerText = "Password has not been changed";
+      }
+      else{
+        pswrdchngWarning.innerText = "Password changed successfully";
+        data.userName = username;
+        data.password = Password;
+        localStorage.setItem('loginInfo',JSON.stringify(data));
+      }
+
+let data2 = JSON.parse(localStorage.getItem("loginInfo"));
+console.log(data2);
+
+}
+function ChangeProfileImage() {
+    let chngeImg = document.querySelector('#chngeImg');
+    let profileImg = document.querySelector('.profile-img');
+    let file = chngeImg.files[0];
+    profileImg.src = URL.createObjectURL(file);
+       console.log(chngeImg);
+}
+let SettingsBody = document.querySelector('#SettingsBody');
+if(SettingsBody) {
+  let saveBtn = document.querySelector('.saveBtn');
+  saveBtn.addEventListener('click',() =>{
+    ChngePassAndUsername();
+  })
+  let UploadBtn = document.querySelector('.UploadBtn');
+   UploadBtn.addEventListener('click',() =>{
+    ChangeProfileImage();
+  })
+}

@@ -30,12 +30,12 @@
 .login-form .scnd-card .main-cont2 .form .fg-pas{
   color: #466e9e;
 }
-.login-form .scnd-card .main-cont2 .form .login-btn{
+.login-form .scnd-card .main-cont2 .form .loginBtn{
      border-radius: 10px;
      height:50px;
      background: #254266;
 }
-.login-form .scnd-card .main-cont2 .form .login-btn:hover{
+.login-form .scnd-card .main-cont2 .form .loginBtn:hover{
      box-shadow: 2px 2px 5px #001B48;
      background: #001B48;
 }
@@ -220,10 +220,14 @@ border-radius: 10px;
   border: 1px solid #E2E8F0;
   box-shadow: 10px 10px 8px #E2E8F0;
 }
-.pay-btn{
+.pay-btn,.saveBtn{
   width: 100px;
   color: #109B47;
   border:1px solid #109B47;
+}
+.saveBtn:hover{
+   background: #44B262;
+   color:white;
 }
 .pay-btn:hover{
   background: #44B262;
@@ -245,7 +249,7 @@ border-radius: 10px;
 .FilterCardbtns:hover{
   color: white;
 }
-.FilterCardbtns{
+.FilterCardbtns,.chngePass{
   margin-top: 20px;
   color: white;
   border-radius: 10px;
@@ -255,7 +259,6 @@ border-radius: 10px;
 }
 .ResetBtn:hover{
   border: 1px  solid gray;
-
 }
 .ResetBtn{
   margin-top: 20px;
@@ -272,12 +275,20 @@ border-radius: 10px;
 .report-sec-btn-hol .card{
   border-radius: 10px;
 }
-.editBtn{
+.editBtn,.editBtnForViolation{
   background: #109B47;
   color: white;
   width: 100px;
   height: 50px;
   margin-bottom: 20px;
+}
+.editFormCard{
+  border-radius: 10px;
+}
+.ChangePasswordCard{
+  border-radius:10px ;
+  border:1px solid #466e9e;
+  box-shadow: 4px 4px 5px #466e9e;
 }
 @media (max-width:1100px){
     .srch-hol input{
